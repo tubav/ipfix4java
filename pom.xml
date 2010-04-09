@@ -1,12 +1,12 @@
 <project>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>de.fhg.fokus.net</groupId>
-  <name>IPFIX File Reader for PRISM</name>
-  <artifactId>ipfix-prism-reader</artifactId>
-  <version>1</version>
-  <packaging>pom</packaging>
-  <modules>
-    <module>ipfix-api</module>
-    <module>ipfix-file-reader</module>
-  </modules>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.fhg.fokus.net</groupId>
+	<name>Java IPFIX </name>
+	<artifactId>java-ipfix</artifactId>
+	<version>0.2beta</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>ipfix-api</module>
+		<module>ipfix-file-reader</module>
+	</modules>
 </project>
