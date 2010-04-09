@@ -1,0 +1,2291 @@
+info: message dump, no data storage.
+#
+# new source: 127.0.0.1/334
+#
+IPFIX-HDR:
+ version=10, length=434
+ unixtime=1267108718 (2010-02-25 15:38:38 CET)
+ seqno=0, odid=334
+TEMPLATE RECORD:
+ template id:  266 
+ nfields:      3
+  field01: ie=0.17, len=4 (bgpDestinationAsNumber)
+  field02: ie=0.323, len=8 (observationTimeMilliseconds)
+  field03: ie=12325.199, len=4 (rtt_usec)
+TEMPLATE RECORD:
+ template id:  265 
+ nfields:      3
+  field01: ie=0.12, len=4 (destinationIPv4Address)
+  field02: ie=0.323, len=8 (observationTimeMilliseconds)
+  field03: ie=12325.199, len=4 (rtt_usec)
+TEMPLATE RECORD:
+ template id:  264 
+ nfields:      16
+  field01: ie=0.148, len=8 (flowId)
+  field02: ie=0.1, len=8 (octetDeltaCount)
+  field03: ie=29305.1, len=8 (reverse octetDeltaCount)
+  field04: ie=0.2, len=8 (packetDeltaCount)
+  field05: ie=29305.2, len=8 (reverse packetDeltaCount)
+  field06: ie=0.22, len=4 (flowStartSysUpTime)
+  field07: ie=29305.22, len=4 (reverse flowStartSysUpTime)
+  field08: ie=29305.21, len=4 (reverse flowEndSysUpTime)
+  field09: ie=0.8, len=4 (sourceIPv4Address)
+  field10: ie=0.12, len=4 (destinationIPv4Address)
+  field11: ie=0.7, len=2 (sourceTransportPort)
+  field12: ie=0.11, len=2 (destinationTransportPort)
+  field13: ie=0.4, len=1 (protocolIdentifier)
+  field14: ie=0.6, len=1 (tcpControlBits)
+  field15: ie=29305.6, len=1 (reverse tcpControlBits)
+  field16: ie=0.32, len=2 (icmpTypeCodeIPv4)
+TEMPLATE RECORD:
+ template id:  263 
+ nfields:      12
+  field01: ie=0.148, len=8 (flowId)
+  field02: ie=0.1, len=8 (octetDeltaCount)
+  field03: ie=0.2, len=8 (packetDeltaCount)
+  field04: ie=0.22, len=4 (flowStartSysUpTime)
+  field05: ie=0.21, len=4 (flowEndSysUpTime)
+  field06: ie=0.8, len=4 (sourceIPv4Address)
+  field07: ie=0.12, len=4 (destinationIPv4Address)
+  field08: ie=0.7, len=2 (sourceTransportPort)
+  field09: ie=0.11, len=2 (destinationTransportPort)
+  field10: ie=0.4, len=1 (protocolIdentifier)
+  field11: ie=0.6, len=1 (tcpControlBits)
+  field12: ie=0.32, len=2 (icmpTypeCodeIPv4)
+TEMPLATE RECORD:
+ template id:  262 
+ nfields:      3
+  field01: ie=12325.336, len=16 (cryptoInitVector)
+  field02: ie=12325.335, len=32 (keyShareAdp)
+  field03: ie=12325.337, len=65535 (encryptedData128)
+TEMPLATE RECORD:
+ template id:  261 
+ nfields:      4
+  field01: ie=12325.336, len=16 (cryptoInitVector)
+  field02: ie=12325.335, len=32 (keyShareAdp)
+  field03: ie=12325.338, len=36 (keyShare256)
+  field04: ie=12325.337, len=65535 (encryptedData128)
+TEMPLATE RECORD:
+ template id:  260 
+ nfields:      3
+  field01: ie=12325.336, len=16 (cryptoInitVector)
+  field02: ie=12325.335, len=32 (keyShareAdp)
+  field03: ie=12325.332, len=65535 (encryptedData128)
+TEMPLATE RECORD:
+ template id:  259 
+ nfields:      4
+  field01: ie=12325.336, len=16 (cryptoInitVector)
+  field02: ie=12325.335, len=32 (keyShareAdp)
+  field03: ie=12325.334, len=16 (keyShare128)
+  field04: ie=12325.332, len=65535 (encryptedData128)
+TEMPLATE RECORD:
+ template id:  258 
+ nfields:      4
+  field01: ie=0.148, len=8 (flowId)
+  field02: ie=0.22, len=4 (flowStartSysUpTime)
+  field03: ie=0.224, len=2 (ipTotalLength)
+  field04: ie=0.313, len=65535 (ipHeaderPacketSection)
+TEMPLATE RECORD:
+ template id:  257 
+ nfields:      3
+  field01: ie=0.22, len=4 (flowStartSysUpTime)
+  field02: ie=0.224, len=2 (ipTotalLength)
+  field03: ie=0.313, len=65535 (ipHeaderPacketSection)
+TEMPLATE RECORD:
+ template id:  256 (option template)
+ nfields:      4
+  field01: scope ie=0.149, len=4 (observationDomainId)
+  field02: ie=0.160, len=8 (systemInitTimeMilliseconds)
+  field03: ie=12325.330, len=4 (sessionId)
+  field04: ie=12325.331, len=4 (transactionId)
+IPFIX-HDR:
+ version=10, length=40
+ unixtime=1267108718 (2010-02-25 15:38:38 CET)
+ seqno=1, odid=334
+DATA RECORD: 
+ template id:  256 (option record)
+ nfields:      4
+ observationDomainId: 334
+ systemInitTimeMilliseconds: 1267108718107
+ sessionId: 111
+ transactionId: 222
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108750 (2010-02-25 15:39:10 CET)
+ seqno=2, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108750753
+ rtt_usec: 26720
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108750 (2010-02-25 15:39:10 CET)
+ seqno=3, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108750780
+ rtt_usec: 10
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108750 (2010-02-25 15:39:10 CET)
+ seqno=4, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108750809
+ rtt_usec: 31314
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108750 (2010-02-25 15:39:10 CET)
+ seqno=5, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108750840
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108751 (2010-02-25 15:39:11 CET)
+ seqno=6, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.65.140
+ observationTimeMilliseconds: 1267108751487
+ rtt_usec: 24576
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108751 (2010-02-25 15:39:11 CET)
+ seqno=7, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108751512
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108751 (2010-02-25 15:39:11 CET)
+ seqno=8, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108751538
+ rtt_usec: 25807
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108751 (2010-02-25 15:39:11 CET)
+ seqno=9, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108751564
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108751 (2010-02-25 15:39:11 CET)
+ seqno=10, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108751742
+ rtt_usec: 27612
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108751 (2010-02-25 15:39:11 CET)
+ seqno=11, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108751770
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=12, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.200.153
+ observationTimeMilliseconds: 1267108752041
+ rtt_usec: 28073
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=13, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108752069
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=14, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108752097
+ rtt_usec: 27828
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=15, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108752124
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=16, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108752155
+ rtt_usec: 26147
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=17, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108752181
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=18, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.65.120
+ observationTimeMilliseconds: 1267108752428
+ rtt_usec: 28379
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=19, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108752457
+ rtt_usec: 10
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=20, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108752590
+ rtt_usec: 27574
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=21, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108752617
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=22, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108752650
+ rtt_usec: 26737
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=23, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108752676
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=24, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.204.100
+ observationTimeMilliseconds: 1267108752775
+ rtt_usec: 27661
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=25, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108752803
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=26, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.204.239
+ observationTimeMilliseconds: 1267108752903
+ rtt_usec: 26646
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108752 (2010-02-25 15:39:12 CET)
+ seqno=27, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108752930
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108753 (2010-02-25 15:39:13 CET)
+ seqno=28, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.196.217
+ observationTimeMilliseconds: 1267108753028
+ rtt_usec: 27327
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108753 (2010-02-25 15:39:13 CET)
+ seqno=29, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108753055
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108753 (2010-02-25 15:39:13 CET)
+ seqno=30, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.197.152
+ observationTimeMilliseconds: 1267108753226
+ rtt_usec: 27288
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108753 (2010-02-25 15:39:13 CET)
+ seqno=31, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108753253
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108753 (2010-02-25 15:39:13 CET)
+ seqno=32, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.143
+ observationTimeMilliseconds: 1267108753447
+ rtt_usec: 28325
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108753 (2010-02-25 15:39:13 CET)
+ seqno=33, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108753475
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108753 (2010-02-25 15:39:13 CET)
+ seqno=34, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.143
+ observationTimeMilliseconds: 1267108753501
+ rtt_usec: 30164
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108753 (2010-02-25 15:39:13 CET)
+ seqno=35, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108753531
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108753 (2010-02-25 15:39:13 CET)
+ seqno=36, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.64.218
+ observationTimeMilliseconds: 1267108753724
+ rtt_usec: 26043
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108753 (2010-02-25 15:39:13 CET)
+ seqno=37, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108753750
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108753 (2010-02-25 15:39:13 CET)
+ seqno=38, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.64.207
+ observationTimeMilliseconds: 1267108753849
+ rtt_usec: 25061
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108753 (2010-02-25 15:39:13 CET)
+ seqno=39, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108753874
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108754 (2010-02-25 15:39:14 CET)
+ seqno=40, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.64.194
+ observationTimeMilliseconds: 1267108753993
+ rtt_usec: 25266
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108754 (2010-02-25 15:39:14 CET)
+ seqno=41, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108754019
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108754 (2010-02-25 15:39:14 CET)
+ seqno=42, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.196.141
+ observationTimeMilliseconds: 1267108754122
+ rtt_usec: 25802
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108754 (2010-02-25 15:39:14 CET)
+ seqno=43, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108754148
+ rtt_usec: 10
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108754 (2010-02-25 15:39:14 CET)
+ seqno=44, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.204.55
+ observationTimeMilliseconds: 1267108754403
+ rtt_usec: 24918
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108754 (2010-02-25 15:39:14 CET)
+ seqno=45, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108754428
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108754 (2010-02-25 15:39:14 CET)
+ seqno=46, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 188.40.128.75
+ observationTimeMilliseconds: 1267108754595
+ rtt_usec: 28808
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108754 (2010-02-25 15:39:14 CET)
+ seqno=47, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108754624
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108754 (2010-02-25 15:39:14 CET)
+ seqno=48, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 193.93.176.135
+ observationTimeMilliseconds: 1267108754745
+ rtt_usec: 48976
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108754 (2010-02-25 15:39:14 CET)
+ seqno=49, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108754794
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108754 (2010-02-25 15:39:14 CET)
+ seqno=50, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.64.226
+ observationTimeMilliseconds: 1267108754891
+ rtt_usec: 25552
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108754 (2010-02-25 15:39:14 CET)
+ seqno=51, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108754917
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=52, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.199.174
+ observationTimeMilliseconds: 1267108755034
+ rtt_usec: 26653
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=53, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108755060
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=54, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.64.30
+ observationTimeMilliseconds: 1267108755137
+ rtt_usec: 26946
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=55, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108755164
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=56, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.65.140
+ observationTimeMilliseconds: 1267108755240
+ rtt_usec: 25262
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=57, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108755265
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=58, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 194.116.241.61
+ observationTimeMilliseconds: 1267108755400
+ rtt_usec: 32735
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=59, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108755433
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=60, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.172
+ observationTimeMilliseconds: 1267108755593
+ rtt_usec: 24739
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=61, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108755618
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=62, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 80.237.194.99
+ observationTimeMilliseconds: 1267108755700
+ rtt_usec: 38301
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=63, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108755738
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=64, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 80.237.194.99
+ observationTimeMilliseconds: 1267108755778
+ rtt_usec: 38660
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108755 (2010-02-25 15:39:15 CET)
+ seqno=65, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108755816
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108756 (2010-02-25 15:39:16 CET)
+ seqno=66, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 195.71.109.239
+ observationTimeMilliseconds: 1267108756186
+ rtt_usec: 30937
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108756 (2010-02-25 15:39:16 CET)
+ seqno=67, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108756217
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108756 (2010-02-25 15:39:16 CET)
+ seqno=68, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 78.47.141.180
+ observationTimeMilliseconds: 1267108756324
+ rtt_usec: 28283
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108756 (2010-02-25 15:39:16 CET)
+ seqno=69, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108756352
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108756 (2010-02-25 15:39:16 CET)
+ seqno=70, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.143
+ observationTimeMilliseconds: 1267108756381
+ rtt_usec: 27342
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108756 (2010-02-25 15:39:16 CET)
+ seqno=71, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108756408
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108756 (2010-02-25 15:39:16 CET)
+ seqno=72, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.197.228
+ observationTimeMilliseconds: 1267108756613
+ rtt_usec: 25950
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108756 (2010-02-25 15:39:16 CET)
+ seqno=73, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108756639
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108757 (2010-02-25 15:39:17 CET)
+ seqno=74, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.197.229
+ observationTimeMilliseconds: 1267108757048
+ rtt_usec: 24978
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108757 (2010-02-25 15:39:17 CET)
+ seqno=75, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108757073
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108757 (2010-02-25 15:39:17 CET)
+ seqno=76, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.196.228
+ observationTimeMilliseconds: 1267108757184
+ rtt_usec: 27603
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108757 (2010-02-25 15:39:17 CET)
+ seqno=77, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108757211
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108757 (2010-02-25 15:39:17 CET)
+ seqno=78, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.185
+ observationTimeMilliseconds: 1267108757403
+ rtt_usec: 25876
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108757 (2010-02-25 15:39:17 CET)
+ seqno=79, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108757429
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108757 (2010-02-25 15:39:17 CET)
+ seqno=80, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.112
+ observationTimeMilliseconds: 1267108757890
+ rtt_usec: 25427
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108757 (2010-02-25 15:39:17 CET)
+ seqno=81, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108757915
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108758 (2010-02-25 15:39:18 CET)
+ seqno=82, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.199
+ observationTimeMilliseconds: 1267108758118
+ rtt_usec: 25149
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108758 (2010-02-25 15:39:18 CET)
+ seqno=83, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108758143
+ rtt_usec: 11
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108758 (2010-02-25 15:39:18 CET)
+ seqno=84, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.196.45
+ observationTimeMilliseconds: 1267108758326
+ rtt_usec: 28563
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108758 (2010-02-25 15:39:18 CET)
+ seqno=85, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108758355
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108758 (2010-02-25 15:39:18 CET)
+ seqno=86, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.223
+ observationTimeMilliseconds: 1267108758488
+ rtt_usec: 26137
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108758 (2010-02-25 15:39:18 CET)
+ seqno=87, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108758514
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108758 (2010-02-25 15:39:18 CET)
+ seqno=88, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.223
+ observationTimeMilliseconds: 1267108758539
+ rtt_usec: 28087
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108758 (2010-02-25 15:39:18 CET)
+ seqno=89, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108758567
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108758 (2010-02-25 15:39:18 CET)
+ seqno=90, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.223
+ observationTimeMilliseconds: 1267108758651
+ rtt_usec: 28035
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108758 (2010-02-25 15:39:18 CET)
+ seqno=91, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108758679
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108758 (2010-02-25 15:39:18 CET)
+ seqno=92, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.223
+ observationTimeMilliseconds: 1267108758805
+ rtt_usec: 30735
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108758 (2010-02-25 15:39:18 CET)
+ seqno=93, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108758835
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108759 (2010-02-25 15:39:19 CET)
+ seqno=94, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.192.66
+ observationTimeMilliseconds: 1267108759065
+ rtt_usec: 26600
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108759 (2010-02-25 15:39:19 CET)
+ seqno=95, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108759092
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108759 (2010-02-25 15:39:19 CET)
+ seqno=96, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.192.84
+ observationTimeMilliseconds: 1267108759268
+ rtt_usec: 26604
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108759 (2010-02-25 15:39:19 CET)
+ seqno=97, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108759295
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108759 (2010-02-25 15:39:19 CET)
+ seqno=98, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.200.101
+ observationTimeMilliseconds: 1267108759508
+ rtt_usec: 34059
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108759 (2010-02-25 15:39:19 CET)
+ seqno=99, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108759542
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108759 (2010-02-25 15:39:19 CET)
+ seqno=100, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 212.227.116.168
+ observationTimeMilliseconds: 1267108759764
+ rtt_usec: 28623
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108759 (2010-02-25 15:39:19 CET)
+ seqno=101, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108759792
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108760 (2010-02-25 15:39:20 CET)
+ seqno=102, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.64.117
+ observationTimeMilliseconds: 1267108760471
+ rtt_usec: 26502
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108760 (2010-02-25 15:39:20 CET)
+ seqno=103, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108760497
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108760 (2010-02-25 15:39:20 CET)
+ seqno=104, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.197.228
+ observationTimeMilliseconds: 1267108760523
+ rtt_usec: 28159
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108760 (2010-02-25 15:39:20 CET)
+ seqno=105, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108760551
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108760 (2010-02-25 15:39:20 CET)
+ seqno=106, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.197.230
+ observationTimeMilliseconds: 1267108760810
+ rtt_usec: 36308
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108760 (2010-02-25 15:39:20 CET)
+ seqno=107, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108760847
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108761 (2010-02-25 15:39:21 CET)
+ seqno=108, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.64.34
+ observationTimeMilliseconds: 1267108761034
+ rtt_usec: 27121
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108761 (2010-02-25 15:39:21 CET)
+ seqno=109, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108761061
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108761 (2010-02-25 15:39:21 CET)
+ seqno=110, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 94.198.62.73
+ observationTimeMilliseconds: 1267108761253
+ rtt_usec: 42361
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108761 (2010-02-25 15:39:21 CET)
+ seqno=111, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108761295
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108761 (2010-02-25 15:39:21 CET)
+ seqno=112, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 212.34.185.141
+ observationTimeMilliseconds: 1267108761436
+ rtt_usec: 31164
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108761 (2010-02-25 15:39:21 CET)
+ seqno=113, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108761467
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108761 (2010-02-25 15:39:21 CET)
+ seqno=114, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 208.71.197.21
+ observationTimeMilliseconds: 1267108761551
+ rtt_usec: 136315
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108761 (2010-02-25 15:39:21 CET)
+ seqno=115, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108761688
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108761 (2010-02-25 15:39:21 CET)
+ seqno=116, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.64.30
+ observationTimeMilliseconds: 1267108761875
+ rtt_usec: 27634
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108761 (2010-02-25 15:39:21 CET)
+ seqno=117, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108761902
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108762 (2010-02-25 15:39:22 CET)
+ seqno=118, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.64.207
+ observationTimeMilliseconds: 1267108761978
+ rtt_usec: 28122
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108762 (2010-02-25 15:39:22 CET)
+ seqno=119, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108762006
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108767 (2010-02-25 15:39:27 CET)
+ seqno=120, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.144.10.87
+ observationTimeMilliseconds: 1267108767504
+ rtt_usec: 26740
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108767 (2010-02-25 15:39:27 CET)
+ seqno=121, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108767531
+ rtt_usec: 11
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108767 (2010-02-25 15:39:27 CET)
+ seqno=122, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.240
+ observationTimeMilliseconds: 1267108767629
+ rtt_usec: 27622
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108767 (2010-02-25 15:39:27 CET)
+ seqno=123, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108767656
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108767 (2010-02-25 15:39:27 CET)
+ seqno=124, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 87.79.3.64
+ observationTimeMilliseconds: 1267108767815
+ rtt_usec: 30083
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108767 (2010-02-25 15:39:27 CET)
+ seqno=125, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108767845
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108767 (2010-02-25 15:39:27 CET)
+ seqno=126, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 87.106.5.232
+ observationTimeMilliseconds: 1267108767969
+ rtt_usec: 26350
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108767 (2010-02-25 15:39:27 CET)
+ seqno=127, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108767995
+ rtt_usec: 8
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=128, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.65.140
+ observationTimeMilliseconds: 1267108768025
+ rtt_usec: 27338
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=129, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108768052
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=130, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108768080
+ rtt_usec: 26800
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=131, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108768107
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=132, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.200.153
+ observationTimeMilliseconds: 1267108768170
+ rtt_usec: 27157
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=133, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108768198
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=134, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108768224
+ rtt_usec: 26417
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=135, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108768250
+ rtt_usec: 5
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=136, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108768298
+ rtt_usec: 26948
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=137, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108768325
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=138, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.65.140
+ observationTimeMilliseconds: 1267108768551
+ rtt_usec: 26223
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=139, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108768577
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=140, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.65.120
+ observationTimeMilliseconds: 1267108768724
+ rtt_usec: 27340
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=141, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108768752
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=142, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.65.140
+ observationTimeMilliseconds: 1267108768778
+ rtt_usec: 28007
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=143, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108768806
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=144, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108768832
+ rtt_usec: 28618
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=145, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108768861
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=146, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108768896
+ rtt_usec: 28320
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=147, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108768924
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=148, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108768953
+ rtt_usec: 26406
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108768 (2010-02-25 15:39:28 CET)
+ seqno=149, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108768980
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=150, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108769192
+ rtt_usec: 27463
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=151, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108769220
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=152, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108769246
+ rtt_usec: 27089
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=153, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108769273
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=154, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108769300
+ rtt_usec: 28033
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=155, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108769329
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=156, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.200.153
+ observationTimeMilliseconds: 1267108769534
+ rtt_usec: 27778
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=157, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108769561
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=158, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108769589
+ rtt_usec: 26215
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=159, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108769615
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=160, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108769643
+ rtt_usec: 29829
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=161, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108769673
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=162, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108769702
+ rtt_usec: 27738
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=163, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108769729
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=164, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108769757
+ rtt_usec: 25999
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=165, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108769783
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=166, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108769812
+ rtt_usec: 29005
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=167, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108769841
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=168, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108769868
+ rtt_usec: 27570
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=169, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108769896
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=170, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108769923
+ rtt_usec: 25542
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108769 (2010-02-25 15:39:29 CET)
+ seqno=171, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108769949
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=172, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108769977
+ rtt_usec: 27311
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=173, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770005
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=174, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108770041
+ rtt_usec: 31524
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=175, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770073
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=176, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108770103
+ rtt_usec: 30588
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=177, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770133
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=178, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108770164
+ rtt_usec: 40662
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=179, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770205
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=180, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108770239
+ rtt_usec: 29340
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=181, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770268
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=182, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108770297
+ rtt_usec: 39224
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=183, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770336
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=184, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108770365
+ rtt_usec: 40805
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=185, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770406
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=186, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108770438
+ rtt_usec: 26227
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=187, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770465
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=188, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108770495
+ rtt_usec: 33367
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=189, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770528
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=190, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108770561
+ rtt_usec: 31695
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=191, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770592
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=192, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108770624
+ rtt_usec: 32895
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=193, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770657
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=194, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108770689
+ rtt_usec: 32246
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=195, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770722
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=196, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108770751
+ rtt_usec: 30410
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=197, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770782
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=198, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.202.242
+ observationTimeMilliseconds: 1267108770810
+ rtt_usec: 28032
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=199, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770838
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=200, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.204.100
+ observationTimeMilliseconds: 1267108770870
+ rtt_usec: 27659
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=201, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770898
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=202, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108770954
+ rtt_usec: 29225
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108770 (2010-02-25 15:39:30 CET)
+ seqno=203, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108770983
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108771 (2010-02-25 15:39:31 CET)
+ seqno=204, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.195.42
+ observationTimeMilliseconds: 1267108771019
+ rtt_usec: 32080
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108771 (2010-02-25 15:39:31 CET)
+ seqno=205, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108771051
+ rtt_usec: 6
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108771 (2010-02-25 15:39:31 CET)
+ seqno=206, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.65.59
+ observationTimeMilliseconds: 1267108771342
+ rtt_usec: 28081
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108771 (2010-02-25 15:39:31 CET)
+ seqno=207, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108771370
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108771 (2010-02-25 15:39:31 CET)
+ seqno=208, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 212.227.116.166
+ observationTimeMilliseconds: 1267108771593
+ rtt_usec: 27151
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108771 (2010-02-25 15:39:31 CET)
+ seqno=209, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108771620
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108771 (2010-02-25 15:39:31 CET)
+ seqno=210, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.64.206
+ observationTimeMilliseconds: 1267108771857
+ rtt_usec: 28270
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108771 (2010-02-25 15:39:31 CET)
+ seqno=211, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108771885
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108772 (2010-02-25 15:39:32 CET)
+ seqno=212, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 213.165.64.218
+ observationTimeMilliseconds: 1267108772088
+ rtt_usec: 26389
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108772 (2010-02-25 15:39:32 CET)
+ seqno=213, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108772114
+ rtt_usec: 7
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108772 (2010-02-25 15:39:32 CET)
+ seqno=214, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.200.198
+ observationTimeMilliseconds: 1267108772350
+ rtt_usec: 26171
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108772 (2010-02-25 15:39:32 CET)
+ seqno=215, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108772376
+ rtt_usec: 10
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108772 (2010-02-25 15:39:32 CET)
+ seqno=216, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.196.88
+ observationTimeMilliseconds: 1267108772906
+ rtt_usec: 27057
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108772 (2010-02-25 15:39:32 CET)
+ seqno=217, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108772933
+ rtt_usec: 9
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108773 (2010-02-25 15:39:33 CET)
+ seqno=218, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 217.72.204.44
+ observationTimeMilliseconds: 1267108773102
+ rtt_usec: 26373
+IPFIX-HDR:
+ version=10, length=36
+ unixtime=1267108773 (2010-02-25 15:39:33 CET)
+ seqno=219, odid=334
+DATA RECORD: 
+ template id:  265 
+ nfields:      3
+ destinationIPv4Address: 10.11.12.2
+ observationTimeMilliseconds: 1267108773129
+ rtt_usec: 8
