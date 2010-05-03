@@ -30,6 +30,8 @@ import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
  * IPFIX file reader implementation (on going). It uses memory mapped files and
  * is currently limited to files of size Integer.MAX_VALUE ( 2^31 -1) bytes.
  * 
+ * TODO use IpfixDefaultTemplateManager
+ * 
  * @author FhG-FOKUS NETwork Research
  * 
  */

@@ -25,13 +25,13 @@ public final class IpfixMessage implements Iterable<IpfixSet> {
 	private final IpfixTemplateManager templateManager;
 	private final Statistics stats;
 
-	public IpfixMessage( IpfixTemplateManager templateManager, IpfixHeader header, ByteBuffer filebuffer ) {
+	public IpfixMessage( IpfixTemplateManager templateManager, IpfixHeader header, ByteBuffer messageBuffer ) {
 		this.header = header;
 		this.templateManager = templateManager;
 		this.stats = templateManager.getStatistics();
 		// slicing
-		this.messageBuffer = ByteBufferUtil.sliceAndSkip(filebuffer, header.getLength() - IpfixHeader.SIZE_IN_OCTETS);
-		stats.fileBufferPosition = filebuffer.position();
+		this.messageBuffer = ByteBufferUtil.sliceAndSkip(messageBuffer, header.getLength() - IpfixHeader.SIZE_IN_OCTETS);
+		stats.globalBufferPosition = messageBuffer.position();
 
 	}
 

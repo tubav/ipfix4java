@@ -15,7 +15,8 @@ public interface IpfixTemplateManager {
 		public long numberOfTemplateRecords = 0;
 		public long numberOfOptionTemplateSets = 0;
 		public long numberOfOptionTemplateRecords = 0;
-		public long fileBufferPosition = 0;
+		// TODO review this in the context of a collector
+		public long globalBufferPosition = 0;
 		public long invalidBytes = 0;
 		public int setBufferPosition = 0;
 
@@ -29,7 +30,7 @@ public interface IpfixTemplateManager {
 							numberOfTemplateRecords,
 							numberOfOptionTemplateSets,
 							numberOfOptionTemplateRecords,
-							fileBufferPosition,
+							globalBufferPosition,
 							setBufferPosition,
 							invalidBytes
 					);

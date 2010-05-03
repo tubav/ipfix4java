@@ -49,7 +49,7 @@ public class IpfixSet implements Iterable<IpfixRecord> {
 		this.templateManager = templateManager;
 		this.stats = templateManager.getStatistics();
 		if(this.header.getLength()==0){
-			throw new RuntimeException("Set length is 0! At "+this.stats.fileBufferPosition);
+			throw new RuntimeException("Set length is 0! At "+this.stats.globalBufferPosition);
 		}
 		
 		this.setBuffer = ByteBufferUtil.sliceAndSkip(messageBuffer, this.header.getLength() -IpfixSetHeader.SIZE_IN_OCTETS);

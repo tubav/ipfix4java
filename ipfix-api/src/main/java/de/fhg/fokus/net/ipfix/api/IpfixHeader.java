@@ -41,7 +41,12 @@ public class IpfixHeader {
 	 * IPFIX header size in octets
 	 */
 	public static final int SIZE_IN_OCTETS = 16;
-
+	public IpfixHeader(byte[] bytes){
+		// TODO handle size error
+		this.byteBuffer = ByteBuffer.allocate(SIZE_IN_OCTETS);
+		this.byteBuffer.put(bytes);
+	}
+	
 	public IpfixHeader(ByteBuffer fileBuffer) {
 
 		this.byteBuffer = ByteBufferUtil.sliceAndSkip(fileBuffer,

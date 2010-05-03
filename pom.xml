@@ -8,5 +8,6 @@
 	<modules>
 		<module>ipfix-api</module>
 		<module>ipfix-file-reader</module>
+		<module>ipfix-collector</module>
 	</modules>
 </project>

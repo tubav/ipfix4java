@@ -22,7 +22,10 @@ import java.nio.ByteBuffer;
  * @version $Id: Unsigned.java,v 1.1 2002/02/12 22:06:44 ron Exp $
  */
 public class ByteBufferUtil {
-
+	// hide constructor
+	private ByteBufferUtil(){
+		
+	}
 	public static short getUnsignedByte(ByteBuffer bbuf) {
 		return ((short) (bbuf.get() & 0xff));
 	}
