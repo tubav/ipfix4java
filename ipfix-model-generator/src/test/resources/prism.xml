@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ipfix.xsl"?>
+<?oxygen RNGSchema="ipfix.rng" type="xml"?>
+<registry xmlns="http://www.iana.org/assignments" id="ipfix">
+	<title>IP Flow Information Export (IPFIX) Information Elements</title>
+	<created>2007-05-10</created>
+	<updated>2010-02-11</updated>
+	<registry id="ipfix-information-element-definitions">
+		<note>
+			New assignments for IPFIX Information Elements will be administered
+			by IANA, on a First Come First Served basis
+			<xref type="rfc" data="rfc2434" />
+			, subject to
+			Expert Review
+			<xref type="rfc" data="rfc2434" />
+			, i.e. review by one of a group of experts
+			designated by an IETF Operations and Management Area Director.
+		</note>
+		<record>
+			<name>roundTripTime</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>unsigned64</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>199</elementId>
+			<status>current</status>
+			<description>
+			</description>
+			<units>microseconds</units>
+		</record>
+		<record>
+			<name>sessionId</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>unsigned32</dataType>
+			<group>none</group>
+			<dataTypeSemantics>identifier</dataTypeSemantics>
+			<elementId>330</elementId>
+			<status>current</status>
+			<description>
+			</description>
+		</record>
+		<record>
+			<name>transactionId</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>unsigned32</dataType>
+			<group>none</group>
+			<dataTypeSemantics>identifier</dataTypeSemantics>
+			<elementId>331</elementId>
+			<status>current</status>
+			<description>
+			</description>
+		</record>
+		<record>
+			<name>AES128EncryptedData</name>
+			<elementId>332</elementId>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>octetArray</dataType>
+			<group>none</group>
+			<dataTypeSemantics>default</dataTypeSemantics>
+			<status>current</status>
+			<description>AES 128 Encrypted data (var length)</description>
+		</record>
+
+		<record>
+			<name>AES128KeyShare</name>
+			<elementId>334</elementId>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>octetArray</dataType>
+			<group>none</group>
+			<dataTypeSemantics>default</dataTypeSemantics>
+			<status>current</status>
+			<description>AES 128 keyshare (32 octets)</description>
+		</record>
+
+
+		
+		<record>
+			<name>keyShareADP</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>octetArray</dataType>
+			<group>none</group>
+			<dataTypeSemantics>default</dataTypeSemantics>
+			<elementId>335</elementId>
+			<status>current</status>
+			<description>PRISM key share ADP (32 octets)</description>
+		</record>
+		<record>
+			<name>KeyShareInitVector</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>octetArray</dataType>
+			<group>none</group>
+			<dataTypeSemantics>default</dataTypeSemantics>
+			<elementId>336</elementId>
+			<status>current</status>
+			<description>PRISM key share init vector</description>
+		</record>
+
+		<record>
+			<name>AES256EncryptedData</name>
+			<elementId>337</elementId>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>octetArray</dataType>
+			<group>none</group>
+			<dataTypeSemantics>default</dataTypeSemantics>
+			<status>current</status>
+			<description>AES 256 Encrypted data (var length)</description>
+		</record>
+
+
+
+		<record>
+			<name>KeyShareIV</name>
+			<elementId>339</elementId>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>octetArray</dataType>
+			<group>none</group>
+			<dataTypeSemantics>default</dataTypeSemantics>
+			<status>current</status>
+			<description>KeyShare IV (16 octets)</description>
+		</record>
+
+		<record>
+			<name>AES256KeyShare</name>
+			<elementId>341</elementId>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>octetArray</dataType>
+			<group>none</group>
+			<dataTypeSemantics>default</dataTypeSemantics>
+			<status>current</status>
+			<description>AES 256 keyshare (36 octets)</description>
+		</record>
+
+
+
+	</registry>
+	<people />
+</registry>

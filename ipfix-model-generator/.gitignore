@@ -1,0 +1,10 @@
+ .externalToolBuilders/*
+.svn
+*.log
+.m2classpath
+.classpath
+.project
+.settings/*
+target/*
+bin/*
+logs/*

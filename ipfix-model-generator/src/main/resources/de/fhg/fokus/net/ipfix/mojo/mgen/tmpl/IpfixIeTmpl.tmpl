@@ -1,0 +1,65 @@
+package %{TARGET_PACKAGE}%;
+
+import de.fhg.fokus.net.ipfix.api.IpfixFieldSpecifier;
+import de.fhg.fokus.net.ipfix.api.IpfixIe;
+import de.fhg.fokus.net.ipfix.api.IpfixIeSemantics;
+import de.fhg.fokus.net.ipfix.api.IpfixIeStatus;
+import de.fhg.fokus.net.ipfix.api.IpfixIeUnits;
+import de.fhg.fokus.net.ipfix.api.codec.%{IE_CODEC}%;
+
+%{IMPORTS}%
+
+/**
+ * %{CLASS_DOCUMENTATION}% 
+ * 
+ */
+public final class %{IE_CLASS_NAME}% extends %{IE_CODEC}% implements IpfixIe {
+	// -- model --
+	private final IpfixFieldSpecifier fieldSpecifier;
+
+	@Override
+	public IpfixFieldSpecifier getFieldSpecifier() {
+		return fieldSpecifier;
+	}
+
+	public %{IE_CLASS_NAME}%() {
+		this.fieldSpecifier = new IpfixFieldSpecifier(%{IE_ENTERPRISE_NUMBER}%).setId(%{IE_ID}%)
+				.setFieldLength(this.fieldLength);
+	}
+	public %{IE_CLASS_NAME}%( int length ) {
+		this.fieldLength = length;
+		this.fieldSpecifier = new IpfixFieldSpecifier(%{IE_ENTERPRISE_NUMBER}%).setId(%{IE_ID}%)
+				.setFieldLength(this.fieldLength);
+	}
+	public %{IE_CLASS_NAME}%( int length, long enterpriseNumber, boolean isScope ) {
+		this.fieldLength = length;
+		this.fieldSpecifier = new IpfixFieldSpecifier(enterpriseNumber).setId(%{IE_ID}%)
+				.setFieldLength(this.fieldLength).setScope(isScope);
+	}
+
+
+	@Override
+	public IpfixIeSemantics getSemantics() {
+		return IpfixIeSemantics.%{IE_SEMANTICS}%;
+	}
+
+	@Override
+	public IpfixIeStatus getStatus() {
+		return IpfixIeStatus.%{IE_STATUS}%;
+	}
+
+	@Override
+	public String getName() {
+		return "%{IE_NAME}%";
+	}
+
+	@Override
+	public int getLength() {
+		return fieldSpecifier.getIeLength();
+	}
+
+	@Override
+	public IpfixIeUnits getUnits() {
+		return IpfixIeUnits.%{IE_UNITS}%;
+	}
+}
