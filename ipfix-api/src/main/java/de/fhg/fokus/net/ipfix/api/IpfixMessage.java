@@ -85,4 +85,45 @@ public final class IpfixMessage implements Iterable<IpfixSet> {
 	public String toString() {
 		return String.format("msg:[ %s ]", header.toString());
 	}
+	/**
+	 * Align byte buffer containing IPFIX messages. It skips invalid data positioning
+	 * the buffer in a valid message. The current implementation uses two finger 
+	 * alignment.
+	 * 
+	 */
+	public static boolean align(ByteBuffer byteBuffer ) {
+		// two fingers alignment
+		int pos = byteBuffer.position();
+		int msg1_version = ByteBufferUtil.getUnsignedShort(byteBuffer,
+				pos + IpfixHeader.IDX_VERSION);
+		// first finger
+		if (msg1_version == Ipfix.VERSION) {
+			int msg1_length = ByteBufferUtil.getUnsignedShort(byteBuffer,
+					pos + IpfixHeader.IDX_LENGTH);
+			if( msg1_length==0){
+				logger
+				.warn("Strange, message length is 0! I'll skip this "
+						+ "and to continue searching for a valid ipfix header.");
+				return false;
+			}
+			int limit = byteBuffer.limit();
+			if (msg1_length > limit) {
+				logger
+				.warn("Message length bigger than available data, I'll skip this "
+						+ "and to continue searching for a valid ipfix header.");
+				return false;
+			}
+			if (byteBuffer.limit() > pos + msg1_length
+					+ IpfixHeader.SIZE_IN_OCTETS) {
+				// second finger
+				return ByteBufferUtil.getUnsignedShort(byteBuffer, pos
+						+ msg1_length + IpfixHeader.IDX_VERSION) == Ipfix.VERSION;
+			}
+			return true;
+		}
+
+		return false;
+
+	}
+
 }

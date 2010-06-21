@@ -37,8 +37,8 @@ public class IpfixFileReaderTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 //		fileReader = new IpfixFileReader(getIpfixFile("ok-01.ipfix"));
-		fileReader = new IpfixFileReader(getIpfixFile("rttexport.ipfix"));
-		
+//		fileReader = new IpfixFileReader(getIpfixFile("rttexport.ipfix"));
+		fileReader = new IpfixFileReader(getIpfixFile("impd4e.ipfix"));
 
 		fileReader.registerDataRecordReader(IpfixRecordSourceIpv4PacketDeltaCount.getReader());
 

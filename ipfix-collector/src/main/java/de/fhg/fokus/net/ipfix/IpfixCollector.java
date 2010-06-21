@@ -12,9 +12,12 @@ import java.util.concurrent.Executors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
 import de.fhg.fokus.net.ipfix.api.IpfixDefaultTemplateManager;
 import de.fhg.fokus.net.ipfix.api.IpfixHeader;
 import de.fhg.fokus.net.ipfix.api.IpfixMessage;
+import de.fhg.fokus.net.ipfix.api.IpfixMessageListener;
+import de.fhg.fokus.net.ipfix.api.IpfixTemplateManager;
 
 /**
  * IPFIX Collector
@@ -22,12 +25,16 @@ import de.fhg.fokus.net.ipfix.api.IpfixMessage;
  * @author FhG-FOKUS NETwork Research
  * 
  */
-public class IpfixCollector  {
+public final class IpfixCollector  {
 	// -- sys --
 	private final Logger logger = LoggerFactory.getLogger(getClass());
+	// TODO used multiple tread pools 
 	private ExecutorService executor = Executors.newCachedThreadPool();
-	// -- model --
+	// -- ctrl --
 	private final IpfixDefaultTemplateManager templateManager = new IpfixDefaultTemplateManager();
+	
+	// -- model --
+	private CopyOnWriteArrayList<IpfixMessageListener> messageListeners = new CopyOnWriteArrayList<IpfixMessageListener>();
 	private CopyOnWriteArrayList<ConnectionHandler> clients = new CopyOnWriteArrayList<ConnectionHandler>();
 	private CopyOnWriteArrayList<ServerSocket> servers = new CopyOnWriteArrayList<ServerSocket>();
 	private class ConnectionHandler {
@@ -38,30 +45,31 @@ public class IpfixCollector  {
 		public ConnectionHandler(Socket socket) throws IOException {
 			logger.debug("Client connected: {}",socket);
 			this.socket = socket;
-			byte[] hbuf = new byte[IpfixHeader.SIZE_IN_OCTETS];
 			InputStream in = socket.getInputStream();
-			int offset=0;
-			int len = hbuf.length;
+			byte [] bbuf = new byte[1024];
+			//			ByteBuffer byteBuffer;
 			while( !exit ){
-				// try to read an ipfix header
-				int nbytes= in.read(hbuf, offset, len);
-				if(nbytes==len ){
-					offset=0;len=0;
-					IpfixHeader header= new IpfixHeader(hbuf);
-					byte[] mbuf = new byte[header.getLength()];
-					nbytes =0;
-					len = mbuf.length;
-					while(offset==mbuf.length){
-						offset+=in.read(mbuf, offset, len);
-						len-=offset;
+				int nbytes = in.read(bbuf);
+				if(nbytes > 0){
+					ByteBuffer  byteBuffer = ByteBuffer.allocate(nbytes);
+					byteBuffer.put(bbuf, 0, nbytes).flip();
+					if( IpfixMessage.align(byteBuffer) ){
+						IpfixHeader hdr = new IpfixHeader(byteBuffer);
+						final IpfixMessage msg = new IpfixMessage(IpfixCollector.this.templateManager, hdr, byteBuffer);
+						// dispatch message to listeners
+						for(final IpfixMessageListener lsn : messageListeners){
+							executor.execute(new Runnable() {
+								@Override
+								public void run() {
+									lsn.onMessage(msg);
+								}
+							});
+						}
 					}
-					IpfixMessage msg = new IpfixMessage(templateManager, header, ByteBuffer.wrap(mbuf));
-					logger.debug(msg+"");
-					
-				} else {
-					logger.debug("read {} while trying to read header",nbytes);
-					offset+=nbytes;
-					len-=nbytes;
+				}
+				if(nbytes==-1){
+					logger.debug("No more data available");
+					break;
 				}
 			}
 		}
@@ -106,6 +114,33 @@ public class IpfixCollector  {
 		}
 		executor.shutdown();
 	}
-
-
+	/**
+	 *  see {@link IpfixTemplateManager#registerDataRecordReader(IpfixDataRecordReader)}	
+	 * 
+	 */
+	public void registerDataRecordReader(IpfixDataRecordReader reader) {
+		templateManager.registerDataRecordReader(reader);
+	}
+	/**
+	 * Register a new IPFIX message listener.
+	 * 
+	 * @param lsn
+	 */
+	public void addMessageListener( IpfixMessageListener lsn ){
+		messageListeners.add(lsn);
+	}
+	/**
+	 * Remove a previous registered IPFIX message listener
+	 * @param lsn
+	 */
+	public void removeMessageListener(IpfixMessageListener lsn){
+		messageListeners.remove(lsn);
+	}
+	/**
+	 * Remove all message listeners
+	 */
+	public void removeAllMessageListeners(){
+		messageListeners.clear();
+	}
+	
 }

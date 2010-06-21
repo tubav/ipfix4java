@@ -1,11 +1,14 @@
 package de.fhg.fokus.net.ipfix.model.ie;
 
+import java.nio.ByteBuffer;
+
 import de.fhg.fokus.net.ipfix.api.IpfixFieldSpecifier;
 import de.fhg.fokus.net.ipfix.api.IpfixIe;
 import de.fhg.fokus.net.ipfix.api.IpfixIeSemantics;
 import de.fhg.fokus.net.ipfix.api.IpfixIeStatus;
 import de.fhg.fokus.net.ipfix.api.IpfixIeUnits;
 import de.fhg.fokus.net.ipfix.api.codec.IpfixIeCodecUnsigned8;
+import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
 
 
 
@@ -39,13 +42,15 @@ public final class IpfixIeProtocolIdentifier extends IpfixIeCodecUnsigned8 imple
 		this.fieldLength = length;
 		this.fieldSpecifier = new IpfixFieldSpecifier(0).setId(4)
 				.setFieldLength(this.fieldLength);
+		if(length!=1){
+			throw new RuntimeException("Field length must be 1!");
+		}
 	}
 	public IpfixIeProtocolIdentifier( int length, long enterpriseNumber, boolean isScope ) {
 		this.fieldLength = length;
 		this.fieldSpecifier = new IpfixFieldSpecifier(enterpriseNumber).setId(4)
 				.setFieldLength(this.fieldLength).setScope(isScope);
 	}
-
 
 	@Override
 	public IpfixIeSemantics getSemantics() {
