@@ -24,7 +24,6 @@ public class IpfixCollectorTest {
 		
 		IpfixCollector ic = new IpfixCollector();
 		ic.registerDataRecordReader(IpfixRecordSourceIpv4PacketDeltaCount.getReader());
-		
 		ic.addMessageListener(new IpfixMessageListener() {
 			@Override
 			public void onMessage(IpfixMessage msg) {
