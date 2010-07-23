@@ -45,10 +45,10 @@ public class IpfixRecordSourceIpv4PacketDeltaCount implements IpfixRecord {
 	 * {@link IpfixRecordSourceIpv4PacketDeltaCount }
 	 */
 	private static final IpfixDataRecordReader reader = new IpfixDataRecordReader() {
-		private final IpfixIeSourceIPv4Address sourceIpv4Address = new IpfixIeSourceIPv4Address();
-		private final IpfixIePacketDeltaCount packetDeltaCount = new IpfixIePacketDeltaCount(4);
+		private final IpfixIeSourceIPv4Address ie1 = new IpfixIeSourceIPv4Address();
+		private final IpfixIePacketDeltaCount ie2 = new IpfixIePacketDeltaCount(4);
 		private final IpfixTemplateForDataReader template = new IpfixTemplateForDataReader(
-				sourceIpv4Address, packetDeltaCount);
+				ie1, ie2);
 
 		@Override
 		public IpfixRecordSourceIpv4PacketDeltaCount getRecord(
@@ -58,8 +58,8 @@ public class IpfixRecordSourceIpv4PacketDeltaCount implements IpfixRecord {
 				return null;
 			}
 			return new IpfixRecordSourceIpv4PacketDeltaCount(
-					sourceIpv4Address.getAddress(setBuffer), 
-					packetDeltaCount.getBigInteger(setBuffer));
+					ie1.getAddress(setBuffer), 
+					ie2.getBigInteger(setBuffer));
 
 		}
 		public String toString() {

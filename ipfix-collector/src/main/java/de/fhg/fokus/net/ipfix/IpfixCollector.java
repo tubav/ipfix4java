@@ -17,11 +17,17 @@ import de.fhg.fokus.net.ipfix.api.IpfixDefaultTemplateManager;
 import de.fhg.fokus.net.ipfix.api.IpfixHeader;
 import de.fhg.fokus.net.ipfix.api.IpfixMessage;
 import de.fhg.fokus.net.ipfix.api.IpfixMessageListener;
+import de.fhg.fokus.net.ipfix.api.IpfixRecord;
+import de.fhg.fokus.net.ipfix.api.IpfixSet;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateManager;
 
 /**
- * <p>IPFIX Collector</p> 
- * <p><b>Usage example</b></p>
+ * <p>
+ * IPFIX Collector
+ * </p>
+ * <p>
+ * <b>Usage example</b>
+ * </p>
  * 
  * <pre>
  * IpfixCollector ic = new IpfixCollector();
@@ -48,6 +54,8 @@ public final class IpfixCollector {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	// TODO used multiple tread pools
 	private ExecutorService executor = Executors.newCachedThreadPool();
+	private ExecutorService clientExecutor = Executors.newCachedThreadPool();
+
 	// -- ctrl --
 	private final IpfixDefaultTemplateManager templateManager = new IpfixDefaultTemplateManager();
 
@@ -109,18 +117,23 @@ public final class IpfixCollector {
 	public void bind(int port) throws IOException {
 		final ServerSocket serverSocket = new ServerSocket(port);
 		servers.add(serverSocket);
-		executor.execute(new Runnable() {
-			@Override
-			public void run() {
-				logger.debug("binding to {}",serverSocket);
-				try {
-					Socket socket = serverSocket.accept();
-					clients.add(new ConnectionHandler(socket));
-				} catch (IOException e) {
-					logger.debug(e + "");
+		while (true) {
+			logger.debug("binding to {}",serverSocket);
+			final Socket socket = serverSocket.accept();
+			executor.execute(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						logger.debug("socket: " + socket);
+						clients.add(new ConnectionHandler(socket));
+						logger.debug("handler finished: {}",socket);
+
+					} catch (IOException e) {
+						logger.debug(e + "");
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 
 	public void shutdow() {
@@ -174,4 +187,32 @@ public final class IpfixCollector {
 		messageListeners.clear();
 	}
 
+	public static void main(String[] args) throws IOException,
+			InterruptedException {
+
+		IpfixCollector ic = new IpfixCollector();
+
+		// register record readers used in application
+		// ic.registerDataRecordReader(IpfixRecordImpd4e.getReader());
+
+		// add message listener
+		ic.addMessageListener(new IpfixMessageListener() {
+			@Override
+			public void onMessage(IpfixMessage msg) {
+				System.out.println("oid: "
+						+ msg.getHeader().getObservationDomainID());
+				// logger.debug(msg+"");
+				for (IpfixSet set : msg) {
+					for (IpfixRecord rec : set) {
+						System.out.println(rec + "");
+					}
+				}
+			}
+		});
+
+		ic.bind(4739);
+		System.out.println("sleeping");
+		Thread.sleep(10000);
+
+	}
 }
