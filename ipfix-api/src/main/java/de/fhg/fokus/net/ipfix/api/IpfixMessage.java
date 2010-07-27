@@ -86,6 +86,46 @@ public final class IpfixMessage implements Iterable<IpfixSet> {
 		return String.format("msg:[ %s ]", header.toString());
 	}
 	/**
+	 * This currently performs the same function as aligned without
+	 * logging messages. The intent is to use in IPFIX collector for
+	 * buffering data in case not enough message is available for decoding. 
+	 * 
+	 * @param byteBuffer
+	 * @return whether buffer contains a complete IPFIX message
+	 */
+	public static boolean enoughData( ByteBuffer byteBuffer){
+		// two fingers alignment
+		int pos = byteBuffer.position();
+		if( pos + ByteBufferUtil.SHORT_SIZE_IN_BYTES > byteBuffer.limit() ){
+			return false;
+		}
+		int msg1_version = ByteBufferUtil.getUnsignedShort(byteBuffer,
+				pos + IpfixHeader.IDX_VERSION);
+		// first finger
+		if (msg1_version == Ipfix.VERSION) {
+			int msg1_length = ByteBufferUtil.getUnsignedShort(byteBuffer,
+					pos + IpfixHeader.IDX_LENGTH);
+			if( msg1_length==0){
+				// message length must not be 0;
+				return false;
+			}
+			int limit = byteBuffer.limit();
+			if (msg1_length > limit) {
+				// message length bigger than available data
+				return false;
+			}
+			if (limit > pos + msg1_length
+					+ IpfixHeader.SIZE_IN_OCTETS) {
+				// second finger
+				return ByteBufferUtil.getUnsignedShort(byteBuffer, pos
+						+ msg1_length + IpfixHeader.IDX_VERSION) == Ipfix.VERSION;
+			}
+			return true;
+		}
+		return false;
+
+	}
+	/**
 	 * Align byte buffer containing IPFIX messages. It skips invalid data positioning
 	 * the buffer in a valid message. The current implementation uses two finger 
 	 * alignment.
@@ -94,6 +134,9 @@ public final class IpfixMessage implements Iterable<IpfixSet> {
 	public static boolean align(ByteBuffer byteBuffer ) {
 		// two fingers alignment
 		int pos = byteBuffer.position();
+		if( pos + ByteBufferUtil.SHORT_SIZE_IN_BYTES > byteBuffer.limit() ){
+			return false;
+		}
 		int msg1_version = ByteBufferUtil.getUnsignedShort(byteBuffer,
 				pos + IpfixHeader.IDX_VERSION);
 		// first finger

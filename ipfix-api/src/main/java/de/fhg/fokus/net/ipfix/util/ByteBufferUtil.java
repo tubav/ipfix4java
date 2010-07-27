@@ -22,6 +22,8 @@ import java.nio.ByteBuffer;
  * @version $Id: Unsigned.java,v 1.1 2002/02/12 22:06:44 ron Exp $
  */
 public class ByteBufferUtil {
+	public static final int SHORT_SIZE_IN_BYTES = Short.SIZE / 8;
+	
 	// hide constructor
 	private ByteBufferUtil(){
 		
@@ -109,6 +111,19 @@ public class ByteBufferUtil {
 		// restoring limit
 		byteBuffer.limit(limit);
 		return slice;
+	}
+	/**
+	 * Concatenate byte buffers. The resulting buffer is ready for reading.
+	 * @param prevBuffer
+	 * @param byteBuffer
+	 * @return a new byte buffer holding both buffers 
+	 */
+	public static ByteBuffer concat(ByteBuffer fst , ByteBuffer snd) {
+		int capacity = fst.remaining() + snd.remaining();
+		ByteBuffer bbuf = ByteBuffer.allocate(capacity);
+		bbuf.put(fst).put(snd);
+		bbuf.flip();
+		return bbuf;
 	}
 	
 	

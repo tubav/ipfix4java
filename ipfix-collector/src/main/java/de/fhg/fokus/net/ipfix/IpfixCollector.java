@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
@@ -12,14 +13,16 @@ import java.util.concurrent.Executors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.fhg.fokus.net.ipfix.api.IpfixCollectorListener;
+import de.fhg.fokus.net.ipfix.api.IpfixConnectionHandler;
 import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
 import de.fhg.fokus.net.ipfix.api.IpfixDefaultTemplateManager;
 import de.fhg.fokus.net.ipfix.api.IpfixHeader;
 import de.fhg.fokus.net.ipfix.api.IpfixMessage;
-import de.fhg.fokus.net.ipfix.api.IpfixMessageListener;
 import de.fhg.fokus.net.ipfix.api.IpfixRecord;
 import de.fhg.fokus.net.ipfix.api.IpfixSet;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateManager;
+import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
 
 /**
  * <p>
@@ -54,25 +57,83 @@ public final class IpfixCollector {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	// TODO used multiple tread pools
 	private ExecutorService executor = Executors.newCachedThreadPool();
-	private ExecutorService clientExecutor = Executors.newCachedThreadPool();
 
 	// -- ctrl --
 	private final IpfixDefaultTemplateManager templateManager = new IpfixDefaultTemplateManager();
 
 	// -- model --
-	private CopyOnWriteArrayList<IpfixMessageListener> messageListeners = new CopyOnWriteArrayList<IpfixMessageListener>();
+	private CopyOnWriteArrayList<IpfixCollectorListener> eventListeners = new CopyOnWriteArrayList<IpfixCollectorListener>();
 	private CopyOnWriteArrayList<ConnectionHandler> clients = new CopyOnWriteArrayList<ConnectionHandler>();
 	private CopyOnWriteArrayList<ServerSocket> servers = new CopyOnWriteArrayList<ServerSocket>();
-
-	private class ConnectionHandler {
+	private enum CollectorEvents {
+		CONNECTED,
+		DISCONNECTED,
+		MESSAGE
+	}
+	/**
+	 * A helper to dispatch events.
+	 * 
+	 * @param evt
+	 * @param handler
+	 * @param msg
+	 */
+	private void dispatchEvent( CollectorEvents evt, final IpfixConnectionHandler handler, final IpfixMessage msg ){
+		switch (evt) {
+		case CONNECTED:
+			for (final IpfixCollectorListener lsn : eventListeners) {
+				executor.execute(new Runnable() {
+					@Override
+					public void run() {
+						lsn.onConnect(handler);
+					}
+				});
+			}
+			break;
+		case DISCONNECTED:
+			for (final IpfixCollectorListener lsn : eventListeners) {
+				executor.execute(new Runnable() {
+					@Override
+					public void run() {
+						lsn.onDisconnect(handler);
+					}
+				});
+			}
+			break;
+		case MESSAGE:
+			for (final IpfixCollectorListener lsn : eventListeners) {
+				executor.execute(new Runnable() {
+					@Override
+					public void run() {
+						lsn.onMessage(handler, msg);
+					}
+				});
+			}
+			break;
+		default:
+			logger.warn("Unsupported event: {}",evt);
+			break;
+		}
+	}
+	/**
+	 * Connection handler
+	 *
+	 */
+	private class ConnectionHandler implements IpfixConnectionHandler {
 		// -- constants --
 		// -- model --
 		private final Socket socket;
 		private boolean exit = false;
+		// -- aux --
+		private ByteBuffer prevBuffer = null;
+		// save remote address for disconnect event
+		private SocketAddress remoteAddress =null;
 
 		public ConnectionHandler(Socket socket) throws IOException {
-			logger.debug("Client connected: {}", socket);
 			this.socket = socket;
+			if(socket.isConnected()){
+				remoteAddress = socket.getRemoteSocketAddress();
+				dispatchEvent(CollectorEvents.CONNECTED, this, null);
+			}
 			InputStream in = socket.getInputStream();
 			byte[] bbuf = new byte[1024];
 			// ByteBuffer byteBuffer;
@@ -81,20 +142,23 @@ public final class IpfixCollector {
 				if (nbytes > 0) {
 					ByteBuffer byteBuffer = ByteBuffer.allocate(nbytes);
 					byteBuffer.put(bbuf, 0, nbytes).flip();
+					// handle previous read
+					if( prevBuffer !=null ){
+						byteBuffer = ByteBufferUtil.concat( prevBuffer, byteBuffer );
+						prevBuffer=null;
+					}
+					if( !IpfixMessage.enoughData(byteBuffer)){
+						prevBuffer=byteBuffer;
+						continue;
+					}
+					// Reading IPFIX message.
 					if (IpfixMessage.align(byteBuffer)) {
 						IpfixHeader hdr = new IpfixHeader(byteBuffer);
 						final IpfixMessage msg = new IpfixMessage(
 								IpfixCollector.this.templateManager, hdr,
 								byteBuffer);
 						// dispatch message to listeners
-						for (final IpfixMessageListener lsn : messageListeners) {
-							executor.execute(new Runnable() {
-								@Override
-								public void run() {
-									lsn.onMessage(msg);
-								}
-							});
-						}
+						dispatchEvent(CollectorEvents.MESSAGE, this, msg);
 					}
 				}
 				if (nbytes == -1) {
@@ -112,6 +176,21 @@ public final class IpfixCollector {
 				logger.error(e + "");
 			}
 		}
+
+		@Override
+		public boolean isConnected() {
+			return socket.isConnected();
+		}
+
+		@Override
+		public SocketAddress getRemoteSocketAddress() {
+			return remoteAddress;
+		}
+
+		@Override
+		public SocketAddress getLocalSocketAddress() {
+			return socket.getLocalSocketAddress();
+		}
 	}
 
 	public void bind(int port) throws IOException {
@@ -123,10 +202,13 @@ public final class IpfixCollector {
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {
+					ConnectionHandler handler = null;
 					try {
 						logger.debug("socket: " + socket);
-						clients.add(new ConnectionHandler(socket));
+						handler = new ConnectionHandler(socket);
+						clients.add(handler);
 						logger.debug("handler finished: {}",socket);
+						dispatchEvent(CollectorEvents.DISCONNECTED, handler, null);
 
 					} catch (IOException e) {
 						logger.debug(e + "");
@@ -167,8 +249,8 @@ public final class IpfixCollector {
 	 * 
 	 * @param lsn
 	 */
-	public void addMessageListener(IpfixMessageListener lsn) {
-		messageListeners.add(lsn);
+	public void addEventListener(IpfixCollectorListener lsn) {
+		eventListeners.add(lsn);
 	}
 
 	/**
@@ -176,19 +258,19 @@ public final class IpfixCollector {
 	 * 
 	 * @param lsn
 	 */
-	public void removeMessageListener(IpfixMessageListener lsn) {
-		messageListeners.remove(lsn);
+	public void removeEventListener(IpfixCollectorListener lsn) {
+		eventListeners.remove(lsn);
 	}
 
 	/**
 	 * Remove all message listeners
 	 */
-	public void removeAllMessageListeners() {
-		messageListeners.clear();
+	public void removeAllEventListeners() {
+		eventListeners.clear();
 	}
 
 	public static void main(String[] args) throws IOException,
-			InterruptedException {
+	InterruptedException {
 
 		IpfixCollector ic = new IpfixCollector();
 
@@ -196,9 +278,9 @@ public final class IpfixCollector {
 		// ic.registerDataRecordReader(IpfixRecordImpd4e.getReader());
 
 		// add message listener
-		ic.addMessageListener(new IpfixMessageListener() {
+		ic.addEventListener(new IpfixCollectorListener() {
 			@Override
-			public void onMessage(IpfixMessage msg) {
+			public void onMessage(IpfixConnectionHandler handler, IpfixMessage msg) {
 				System.out.println("oid: "
 						+ msg.getHeader().getObservationDomainID());
 				// logger.debug(msg+"");
@@ -207,6 +289,18 @@ public final class IpfixCollector {
 						System.out.println(rec + "");
 					}
 				}
+			}
+
+			@Override
+			public void onConnect(IpfixConnectionHandler handler) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onDisconnect(IpfixConnectionHandler handler) {
+				// TODO Auto-generated method stub
+
 			}
 		});
 
