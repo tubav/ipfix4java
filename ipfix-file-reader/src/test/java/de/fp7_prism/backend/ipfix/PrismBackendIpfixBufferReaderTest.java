@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import de.fhg.fokus.net.ipfix.IpfixFileReaderTest;
 import de.fhg.fokus.net.ipfix.api.IpfixMessage;
-import de.fhg.fokus.net.ipfix.api.IpfixRecord;
 import de.fhg.fokus.net.ipfix.api.IpfixSet;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateManager.Statistics;
 import de.fhg.fokus.net.ipfix.util.HexDump;
@@ -56,7 +55,7 @@ public class PrismBackendIpfixBufferReaderTest {
 		PrismBackendIpfixBufferReader reader = new PrismBackendIpfixBufferReader(ipfixFile);
 		for( IpfixMessage msg : reader ){
 			for (IpfixSet set : msg ){
-				for(IpfixRecord record: set ){
+				for(Object record: set ){
 					if (record instanceof IpfixRecordAsdfRtt) {
 						IpfixRecordAsdfRtt rtt = (IpfixRecordAsdfRtt) record;
 						if(rtt.getRoundTripTime().longValue() ==  4206020633l ){

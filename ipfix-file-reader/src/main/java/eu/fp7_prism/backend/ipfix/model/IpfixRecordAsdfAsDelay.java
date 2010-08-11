@@ -4,7 +4,6 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 
 import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
-import de.fhg.fokus.net.ipfix.api.IpfixRecord;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateForDataReader;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeBgpDestinationAsNumber;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeObservationTimeMilliseconds;
@@ -21,7 +20,7 @@ import eu.fp7_prism.backend.ipfix.model.ie.IpfixIeRoundTripTime;
  * 
  */
 
-public final class IpfixRecordAsdfAsDelay implements IpfixRecord {
+public final class IpfixRecordAsdfAsDelay {
 	private final long ipfixIeBgpDestinationAsNumber;
 	private final BigInteger observationTimeMilliseconds;
 	private final BigInteger rountTripTime;
@@ -65,7 +64,7 @@ public final class IpfixRecordAsdfAsDelay implements IpfixRecord {
 		}
 
 		@Override
-		public IpfixRecord getRecord(ByteBuffer setBuffer) {
+		public Object getRecord(ByteBuffer setBuffer) {
 			return new IpfixRecordAsdfAsDelay(f0.getLong(setBuffer), f1
 					.getBigInteger(setBuffer), f2.getBigInteger(setBuffer));
 		}

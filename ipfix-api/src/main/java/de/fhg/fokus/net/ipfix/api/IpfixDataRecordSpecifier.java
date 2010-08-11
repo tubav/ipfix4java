@@ -6,7 +6,7 @@ package de.fhg.fokus.net.ipfix.api;
  * @author FhG-FOKUS NETwork Research
  *
  */
-public interface IpfixDataRecordSpecifier extends IpfixRecord {
+public interface IpfixDataRecordSpecifier {
 
 	public int getTemplateId();
 	public int getDataRecordLength();

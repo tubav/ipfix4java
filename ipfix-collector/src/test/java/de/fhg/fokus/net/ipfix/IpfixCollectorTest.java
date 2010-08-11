@@ -4,10 +4,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.fhg.fokus.net.ipfix.api.IpfixCollectorListener;
 import de.fhg.fokus.net.ipfix.api.IpfixConnectionHandler;
 import de.fhg.fokus.net.ipfix.api.IpfixMessage;
-import de.fhg.fokus.net.ipfix.api.IpfixCollectorListener;
-import de.fhg.fokus.net.ipfix.api.IpfixRecord;
 import de.fhg.fokus.net.ipfix.api.IpfixSet;
 import de.fhg.fokus.net.ipfix.record.IpfixRecordSourceIpv4PacketDeltaCount;
 
@@ -30,7 +29,7 @@ public class IpfixCollectorTest {
 			public void onMessage( IpfixConnectionHandler handler, IpfixMessage msg) {
 				logger.debug(msg+"");
 				for(IpfixSet set: msg){
-					for(IpfixRecord rec: set){
+					for(Object rec: set){
 						logger.debug(rec+"");
 					}
 				}

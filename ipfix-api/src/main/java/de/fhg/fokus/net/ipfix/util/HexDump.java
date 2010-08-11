@@ -7,8 +7,9 @@ public class HexDump {
 		return toHexString(in, in.length+1);
 	}
 	public static String toHexString( ByteBuffer bbuf ){
-		byte [] bytes = new byte[bbuf.capacity()];
-		bbuf.get(bytes);
+		ByteBuffer tmp = bbuf.slice(); // slicing buffer so we do change position of origin buffer
+		byte [] bytes = new byte[tmp.remaining()];
+		tmp.get(bytes);
 		return toHexString(bytes);
 	}
 	

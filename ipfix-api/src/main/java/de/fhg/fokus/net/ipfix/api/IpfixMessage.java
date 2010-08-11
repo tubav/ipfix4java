@@ -42,7 +42,13 @@ public final class IpfixMessage implements Iterable<IpfixSet> {
 	public void setHeader(IpfixHeader header) {
 		this.header = header;
 	}
-
+	/**
+	 * @return a sliced byte buffer of this message. Contents are shared, 
+	 * position and limit are not.
+	 */
+	public ByteBuffer getMessageBuffer() {
+		return messageBuffer.slice();
+	}
 	public Iterator<IpfixSet> iterator() {
 		return new Iterator<IpfixSet>() {
 

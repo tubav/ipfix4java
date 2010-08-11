@@ -19,10 +19,10 @@ import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
 import de.fhg.fokus.net.ipfix.api.IpfixDefaultTemplateManager;
 import de.fhg.fokus.net.ipfix.api.IpfixHeader;
 import de.fhg.fokus.net.ipfix.api.IpfixMessage;
-import de.fhg.fokus.net.ipfix.api.IpfixRecord;
 import de.fhg.fokus.net.ipfix.api.IpfixSet;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateManager;
 import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
+import de.fhg.fokus.net.ipfix.util.HexDump;
 
 /**
  * <p>
@@ -140,8 +140,10 @@ public final class IpfixCollector {
 			while (!exit) {
 				int nbytes = in.read(bbuf);
 				if (nbytes > 0) {
+					
 					ByteBuffer byteBuffer = ByteBuffer.allocate(nbytes);
 					byteBuffer.put(bbuf, 0, nbytes).flip();
+
 					// handle previous read
 					if( prevBuffer !=null ){
 						byteBuffer = ByteBufferUtil.concat( prevBuffer, byteBuffer );
@@ -151,13 +153,17 @@ public final class IpfixCollector {
 						prevBuffer=byteBuffer;
 						continue;
 					}
-					// Reading IPFIX message.
-					if (IpfixMessage.align(byteBuffer)) {
+
+					// Reading IPFIX messages
+					while (IpfixMessage.align(byteBuffer)) {
 						IpfixHeader hdr = new IpfixHeader(byteBuffer);
+//						logger.debug("prev: "+HexDump.toHexString(byteBuffer));
+						
 						final IpfixMessage msg = new IpfixMessage(
 								IpfixCollector.this.templateManager, hdr,
 								byteBuffer);
-						// dispatch message to listeners
+//						logger.debug("msg:  "+HexDump.toHexString(msg.getMessageBuffer()));
+//						 dispatch message to listeners
 						dispatchEvent(CollectorEvents.MESSAGE, this, msg);
 					}
 				}
@@ -285,7 +291,7 @@ public final class IpfixCollector {
 						+ msg.getHeader().getObservationDomainID());
 				// logger.debug(msg+"");
 				for (IpfixSet set : msg) {
-					for (IpfixRecord rec : set) {
+					for (Object rec : set) {
 						System.out.println(rec + "");
 					}
 				}

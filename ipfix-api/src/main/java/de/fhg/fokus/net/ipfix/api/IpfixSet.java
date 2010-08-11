@@ -14,7 +14,7 @@ import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
  * @author FhG-FOKUS NETwork Research
  * 
  */
-public class IpfixSet implements Iterable<IpfixRecord> {
+public class IpfixSet implements Iterable<Object> {
 	// -- sys --
 	private static final Logger logger = LoggerFactory
 			.getLogger(IpfixSet.class);
@@ -25,13 +25,13 @@ public class IpfixSet implements Iterable<IpfixRecord> {
 	// -- management --
 	private final IpfixTemplateManager templateManager;
 	private final Statistics stats;
-	private Iterator<IpfixRecord> iterator = new Iterator<IpfixRecord>() {
+	private Iterator<Object> iterator = new Iterator<Object>() {
 		@Override
 		public void remove() {
 		}
 
 		@Override
-		public IpfixRecord next() {
+		public Object next() {
 			throw new NoSuchElementException();
 		}
 
@@ -161,7 +161,7 @@ public class IpfixSet implements Iterable<IpfixRecord> {
 	}
 
 	@Override
-	public Iterator<IpfixRecord> iterator() {
+	public Iterator<Object> iterator() {
 		return iterator;
 	}
 
@@ -172,11 +172,11 @@ public class IpfixSet implements Iterable<IpfixRecord> {
 	/**
 	 * Generic abstract ipfix record iterator
 	 */
-	private static abstract class RecordIterator implements Iterator<IpfixRecord> {
-		protected IpfixRecord last = null, next = null;
+	private static abstract class RecordIterator implements Iterator<Object> {
+		protected Object last = null, next = null;
 
 		@Override
-		public final IpfixRecord next() {
+		public final Object next() {
 			if (next == null && !hasNext()) {
 				throw new NoSuchElementException();
 			}

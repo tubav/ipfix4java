@@ -5,7 +5,6 @@ import java.net.Inet4Address;
 import java.nio.ByteBuffer;
 
 import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
-import de.fhg.fokus.net.ipfix.api.IpfixRecord;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateForDataReader;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeDestinationIPv4Address;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeDestinationTransportPort;
@@ -24,7 +23,7 @@ import de.fhg.fokus.net.ipfix.model.ie.IpfixIeSourceTransportPort;
  * @author FhG-FOKUS NETwork Research
  * 
  */
-public final class IpfixRecordFlow4 implements IpfixRecord {
+public final class IpfixRecordFlow4 {
 
 	private final BigInteger flowStartMilliseconds;
 	private final BigInteger flowEndMilliseconds;
@@ -95,7 +94,7 @@ public final class IpfixRecordFlow4 implements IpfixRecord {
 				f0, f1, f2, f3, f4, f5, f6, f7, f8, f9);
 
 		@Override
-		public IpfixRecord getRecord(ByteBuffer setBuffer) {
+		public Object getRecord(ByteBuffer setBuffer) {
 			if (!setBuffer.hasRemaining()) {
 				return null;
 			}

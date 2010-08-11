@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import de.fhg.fokus.net.ipfix.api.IpfixFieldSpecifier;
 import de.fhg.fokus.net.ipfix.api.IpfixMessage;
-import de.fhg.fokus.net.ipfix.api.IpfixRecord;
 import de.fhg.fokus.net.ipfix.api.IpfixSet;
 import de.fhg.fokus.net.ipfix.record.IpfixRecordSourceIpv4PacketDeltaCount;
 import eu.fp7_prism.backend.ipfix.model.IpfixRecordAsdfAsDelay;
@@ -80,7 +79,7 @@ public class IpfixFileReaderTest {
 			logger.debug(msg.toString());
 			for( IpfixSet set: msg ){
 				logger.debug(" +-{}",set);
-				for( IpfixRecord rec: set ){
+				for( Object rec: set ){
 					logger.debug("   +-{}",rec);
 				}
 			}

@@ -9,7 +9,7 @@ import de.fhg.fokus.net.ipfix.util.HexDump;
  * @author FhG-FOKUS NETwork Research
  *
  */
-public class IpfixDefaultDataRecord implements IpfixRecord {
+public class IpfixDefaultDataRecord {
 	private final ByteBuffer byteBuffer;
 	/**
 	 * Slice the set buffer from the current position len bytes long.

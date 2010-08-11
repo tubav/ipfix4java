@@ -5,7 +5,6 @@ import java.net.Inet4Address;
 import java.nio.ByteBuffer;
 
 import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
-import de.fhg.fokus.net.ipfix.api.IpfixRecord;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateForDataReader;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeDestinationIPv4Address;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeObservationTimeMilliseconds;
@@ -25,7 +24,7 @@ import eu.fp7_prism.backend.ipfix.model.ie.IpfixIeRoundTripTime;
  * @author FhG-FOKUS NETwork Research
  * 
  */
-public final class IpfixRecordAsdfRtt implements IpfixRecord {
+public final class IpfixRecordAsdfRtt  {
 	private final Inet4Address destinationIPv4Address;
 	private final BigInteger observationTimeMilliseconds;
 	private final BigInteger roundTripTime;
@@ -96,7 +95,7 @@ public final class IpfixRecordAsdfRtt implements IpfixRecord {
 		}
 
 		@Override
-		public IpfixRecord getRecord(ByteBuffer setBuffer) {
+		public Object getRecord(ByteBuffer setBuffer) {
 			ByteBuffer bb = ByteBufferUtil.slice(setBuffer, recordSize);
 			IpfixRecordAsdfRtt rtt = new IpfixRecordAsdfRtt(f0.getAddress(setBuffer), f1
 					.getBigInteger(setBuffer), f2.getBigInteger(setBuffer));

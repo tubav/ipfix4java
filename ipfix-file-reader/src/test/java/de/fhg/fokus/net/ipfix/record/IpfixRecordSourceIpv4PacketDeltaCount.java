@@ -5,7 +5,6 @@ import java.net.Inet4Address;
 import java.nio.ByteBuffer;
 
 import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
-import de.fhg.fokus.net.ipfix.api.IpfixRecord;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateForDataReader;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIePacketDeltaCount;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeSourceIPv4Address;
@@ -15,7 +14,7 @@ import de.fhg.fokus.net.ipfix.model.ie.IpfixIeSourceIPv4Address;
  * @author FhG-FOKUS NETwork Research
  * 
  */
-public class IpfixRecordSourceIpv4PacketDeltaCount implements IpfixRecord {
+public class IpfixRecordSourceIpv4PacketDeltaCount  {
 	private final Inet4Address sourceIpv4Address;
 	private final BigInteger packetDeltaCount;
 
