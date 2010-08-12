@@ -62,7 +62,7 @@ public final class IpfixMessage implements Iterable<IpfixSet> {
 				if(iMessageBuffer.hasRemaining()){
 					try {
 						currentSetHeader = new IpfixSetHeader(iMessageBuffer);
-						next = new IpfixSet(templateManager, currentSetHeader, iMessageBuffer);
+						next = new IpfixSet(IpfixMessage.this,templateManager, currentSetHeader, iMessageBuffer);
 						return true;
 					} catch (Exception e) {
 						logger.error(e.getMessage());

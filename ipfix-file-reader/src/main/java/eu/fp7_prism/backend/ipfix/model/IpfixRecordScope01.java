@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 
 import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
 import de.fhg.fokus.net.ipfix.api.IpfixEnterpriseNumbers;
+import de.fhg.fokus.net.ipfix.api.IpfixMessage;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateForDataReader;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeHashOutputRangeMax;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeHashSelectedRangeMin;
@@ -83,7 +84,7 @@ public class IpfixRecordScope01  {
 		}
 
 		@Override
-		public Object getRecord(ByteBuffer setBuffer) {
+		public Object getRecord(IpfixMessage msg, ByteBuffer setBuffer) {
 			return new IpfixRecordScope01(f0.getLong(setBuffer), f1
 					.getBigInteger(setBuffer), f2.getBigInteger(setBuffer)
 					.longValue(), f3.getBigInteger(setBuffer).longValue());

@@ -5,6 +5,7 @@ import java.net.Inet4Address;
 import java.nio.ByteBuffer;
 
 import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
+import de.fhg.fokus.net.ipfix.api.IpfixMessage;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateForDataReader;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeDestinationIPv4Address;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeDestinationTransportPort;
@@ -94,7 +95,7 @@ public final class IpfixRecordFlow4 {
 				f0, f1, f2, f3, f4, f5, f6, f7, f8, f9);
 
 		@Override
-		public Object getRecord(ByteBuffer setBuffer) {
+		public Object getRecord(IpfixMessage msg, ByteBuffer setBuffer) {
 			if (!setBuffer.hasRemaining()) {
 				return null;
 			}

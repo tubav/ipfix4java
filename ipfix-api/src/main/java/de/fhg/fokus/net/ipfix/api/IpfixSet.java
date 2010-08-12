@@ -42,9 +42,10 @@ public class IpfixSet implements Iterable<Object> {
 			return false;
 		}
 	};
-
-	public IpfixSet(IpfixTemplateManager templateManager,
+	private final IpfixMessage msg;
+	public IpfixSet(IpfixMessage msg, IpfixTemplateManager templateManager,
 			IpfixSetHeader header, ByteBuffer messageBuffer) {
+		this.msg = msg;
 		this.header = header;
 		this.templateManager = templateManager;
 		this.stats = templateManager.getStatistics();
@@ -90,7 +91,7 @@ public class IpfixSet implements Iterable<Object> {
 								return false;
 							}
 						} else {
-							next = recordReader.getRecord(setBuffer);
+							next = recordReader.getRecord(IpfixSet.this.msg, setBuffer);
 							stats.numberOfDataRecords++;
 							return true;
 						}

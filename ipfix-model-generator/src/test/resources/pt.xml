@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ipfix.xsl"?>
+<?oxygen RNGSchema="ipfix.rng" type="xml"?>
+<registry xmlns="http://www.iana.org/assignments" id="ipfix">
+	<title>IP Flow Information Export (IPFIX) Information Elements</title>
+	<created>2007-05-10</created>
+	<updated>2010-02-11</updated>
+	<registry id="ipfix-information-element-definitions">
+		<note>
+			New assignments for IPFIX Information Elements will be administered
+			by IANA, on a First Come First Served basis
+			<xref type="rfc" data="rfc2434" />
+			, subject to
+			Expert Review
+			<xref type="rfc" data="rfc2434" />
+			, i.e. review by one of a group of experts
+			designated by an IETF Operations and Management Area Director.
+		</note>
+		<record>
+			<name>PtSystemCpuIdle</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>float32</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>340</elementId>
+			<status>current</status>
+			<description>system CPU idle in %</description>
+		</record>
+		<record>
+			<name>PtSystemMemFree</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>unsigned64</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>341</elementId>
+			<status>current</status>
+			<description> system free memory in kilobytes </description>
+		</record>
+		<record>
+			<name>PtProcessCpuUser</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>float32</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>342</elementId>
+			<status>current</status>
+			<description>percentage of CPU used in user level (application)</description>
+		</record>
+
+		<record>
+			<name>PtProcessCpuSys</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>float32</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>343</elementId>
+			<status>current</status>
+			<description>percentage of CPU used in system level (kernel)</description>
+		</record>
+		<record>
+			<name>PtProcessMemVzs</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>unsigned64</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>344</elementId>
+			<status>current</status>
+			<description>the process virtual memory used in kilobytes</description>
+		</record>
+		<record>
+			<name>PtProcessMemRss</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>unsigned64</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>345</elementId>
+			<status>current</status>
+			<description>the process resident set size in kilobytes</description>
+		</record>
+		<record>
+			<name>PtPcapStatRecv</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>unsigned64</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>346</elementId>
+			<status>current</status>
+			<description>number of packets received by pcap</description>
+		</record>
+		<record>
+			<name>PtPcapStatDrop</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>unsigned64</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>346</elementId>
+			<status>current</status>
+			<description>number of packets received by pcap</description>
+		</record>
+
+
+	</registry>
+	<people />
+</registry>

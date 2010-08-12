@@ -14,7 +14,7 @@ public interface IpfixDataRecordReader  {
 	 * @param setBuffer
 	 * @return ipfix record or null if record could not be read.
 	 */
-	public Object getRecord( ByteBuffer setBuffer );
+	public Object getRecord( IpfixMessage msg, ByteBuffer setBuffer );
 	public IpfixTemplateForDataReader getTemplate(); 
 	
 }

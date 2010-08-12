@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 
 import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
 import de.fhg.fokus.net.ipfix.api.IpfixEnterpriseNumbers;
+import de.fhg.fokus.net.ipfix.api.IpfixMessage;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateForDataReader;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeObservationDomainId;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeSystemInitTimeMilliseconds;
@@ -88,7 +89,7 @@ public class IpfixRecordTransactionOptions  {
 		}
 
 		@Override
-		public Object getRecord(ByteBuffer setBuffer) {
+		public Object getRecord(IpfixMessage msg, ByteBuffer setBuffer) {
 			return new IpfixRecordTransactionOptions(f0.getLong(setBuffer), f1
 					.getBigInteger(setBuffer), f2.getLong(setBuffer), f3
 					.getLong(setBuffer));

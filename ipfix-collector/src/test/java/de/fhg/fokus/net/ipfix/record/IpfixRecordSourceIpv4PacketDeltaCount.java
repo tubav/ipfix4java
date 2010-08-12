@@ -5,6 +5,7 @@ import java.net.Inet4Address;
 import java.nio.ByteBuffer;
 
 import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
+import de.fhg.fokus.net.ipfix.api.IpfixMessage;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateForDataReader;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIePacketDeltaCount;
 import de.fhg.fokus.net.ipfix.model.ie.IpfixIeSourceIPv4Address;
@@ -50,7 +51,7 @@ public class IpfixRecordSourceIpv4PacketDeltaCount {
 				sourceIpv4Address, packetDeltaCount);
 
 		@Override
-		public IpfixRecordSourceIpv4PacketDeltaCount getRecord(
+		public IpfixRecordSourceIpv4PacketDeltaCount getRecord( IpfixMessage msg, 
 				ByteBuffer setBuffer) {
 
 			if (!setBuffer.hasRemaining()) {
