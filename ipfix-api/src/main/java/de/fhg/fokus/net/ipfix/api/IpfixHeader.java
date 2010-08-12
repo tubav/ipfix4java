@@ -72,12 +72,12 @@ public class IpfixHeader {
 		return this;
 	}
 
-	public Long getExportTime() {
+	public long getExportTime() {
 		return ByteBufferUtil.getUnsignedInt(byteBuffer, IDX_EXPORT_TIME);
 
 	}
 
-	public IpfixHeader setExportTime(Long exportTime) {
+	public IpfixHeader setExportTime(long exportTime) {
 		ByteBufferUtil.putUnsignedInt(byteBuffer, IDX_EXPORT_TIME, exportTime);
 		return this;
 	}
@@ -87,7 +87,7 @@ public class IpfixHeader {
 
 	}
 
-	public IpfixHeader setSequenceNumber(Long sequenceNumber) {
+	public IpfixHeader setSequenceNumber(long sequenceNumber) {
 		ByteBufferUtil.putUnsignedInt(byteBuffer, IDX_SEQUENCE_NUMBER,
 				sequenceNumber);
 		return this;
@@ -98,7 +98,7 @@ public class IpfixHeader {
 				IDX_OBSERVATION_DOMAIN_ID);
 	}
 
-	public IpfixHeader setObservationDomainID(Long observationDomainID) {
+	public IpfixHeader setObservationDomainID(long observationDomainID) {
 		ByteBufferUtil.putUnsignedInt(byteBuffer, IDX_OBSERVATION_DOMAIN_ID,
 				observationDomainID);
 		return this;

@@ -2,9 +2,9 @@
 <?xml-stylesheet type="text/xsl" href="ipfix.xsl"?>
 <?oxygen RNGSchema="ipfix.rng" type="xml"?>
 <registry xmlns="http://www.iana.org/assignments" id="ipfix">
-	<title>IP Flow Information Export (IPFIX) Information Elements</title>
-	<created>2007-05-10</created>
-	<updated>2010-02-11</updated>
+	<title>IPFIX IEs for PacketTracking</title>
+	<created>2010-08-11</created>
+	<updated>2010-08-12</updated>
 	<registry id="ipfix-information-element-definitions">
 		<note>
 			New assignments for IPFIX Information Elements will be administered
@@ -80,7 +80,7 @@
 		<record>
 			<name>PtPcapStatRecv</name>
 			<enterpriseNumber>12325</enterpriseNumber>
-			<dataType>unsigned64</dataType>
+			<dataType>unsigned32</dataType>
 			<group>none</group>
 			<dataTypeSemantics>quantity</dataTypeSemantics>
 			<elementId>346</elementId>
@@ -90,10 +90,10 @@
 		<record>
 			<name>PtPcapStatDrop</name>
 			<enterpriseNumber>12325</enterpriseNumber>
-			<dataType>unsigned64</dataType>
+			<dataType>unsigned32</dataType>
 			<group>none</group>
 			<dataTypeSemantics>quantity</dataTypeSemantics>
-			<elementId>346</elementId>
+			<elementId>347</elementId>
 			<status>current</status>
 			<description>number of packets received by pcap</description>
 		</record>

@@ -1,5 +1,7 @@
 package de.fhg.fokus.net.ipfix.api.codec;
 
+import java.nio.ByteBuffer;
+
 import de.fhg.fokus.net.ipfix.api.IpfixIeCodec;
 import de.fhg.fokus.net.ipfix.api.IpfixIeDataTypes;
 
@@ -14,6 +16,10 @@ public class IpfixIeCodecFloat32 implements IpfixIeCodec {
 	@Override
 	public IpfixIeDataTypes getDataType() {
 		return IpfixIeDataTypes.FLOAT32;
+	}
+	// TODO review
+	public float getFloat(ByteBuffer setBuffer) {
+		return setBuffer.getFloat();
 	}
 
 }
