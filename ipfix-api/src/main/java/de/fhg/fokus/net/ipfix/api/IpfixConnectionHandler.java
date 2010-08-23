@@ -1,6 +1,6 @@
 package de.fhg.fokus.net.ipfix.api;
 
-import java.net.SocketAddress;
+import java.net.Socket;
 
 /**
  * IPFIX Handler
@@ -10,17 +10,8 @@ import java.net.SocketAddress;
  */
 public interface IpfixConnectionHandler {
 	public boolean isConnected();
-	/**
-	 * Get remote address. Note that remote address is available 
-	 * even after disconnection.
-	 * 
-	 * @return remote socket address or null
-	 */
-	public SocketAddress getRemoteSocketAddress();
-	/**
-	 * 
-	 * @return remote socket address or null
-	 */
-	public SocketAddress getLocalSocketAddress();
+	public Socket getSocket();
+	public Object getAttachment();
+	public void setAttachment(Object obj);
 	
 }

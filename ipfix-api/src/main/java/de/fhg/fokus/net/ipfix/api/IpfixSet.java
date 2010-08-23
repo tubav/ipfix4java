@@ -79,7 +79,8 @@ public class IpfixSet implements Iterable<Object> {
 					if (setBuffer.hasRemaining()) {
 						if (recordReader == null) {
 							if( recordSpecifier==null){
-								logger.debug("Skipping unknown set.");
+								// Skipping unknown set
+								IpfixSet.this.templateManager.onUnknownSet(IpfixSet.this.msg, setBuffer);
 								return false;
 							}
 							if (  !recordSpecifier.isVariableLength()) {

@@ -1,5 +1,7 @@
 package de.fhg.fokus.net.ipfix.api;
 
+import java.nio.ByteBuffer;
+
 /**
  * Manages IPFIX template state.
  * 
@@ -78,6 +80,8 @@ public interface IpfixTemplateManager {
 	 * @return information element
 	 */
 	public IpfixIe getInformationElement(IpfixFieldSpecifier fieldSpecifier);
+	
+	public void onUnknownSet( IpfixMessage msg, ByteBuffer setBuffer );
 
 	public Statistics getStatistics();
 

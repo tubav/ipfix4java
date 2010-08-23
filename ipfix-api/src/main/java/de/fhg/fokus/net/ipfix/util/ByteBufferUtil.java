@@ -2,6 +2,9 @@ package de.fhg.fokus.net.ipfix.util;
 
 import java.nio.ByteBuffer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Utilities to operate on {@link ByteBuffer}s. 
  * <h2> Unsigned</h2>
@@ -87,9 +90,12 @@ public class ByteBufferUtil {
 	 * @param byteBuffer
 	 * @param length
 	 */
+	private static final Logger logger = LoggerFactory.getLogger(ByteBufferUtil.class);
 	public static ByteBuffer sliceAndSkip(ByteBuffer byteBuffer, int length ){
 		final int endpos = byteBuffer.position() + length;
 		final int limit = byteBuffer.limit();
+		logger.debug("length: {}, limit: {}, position:"+byteBuffer.position(),length,limit);
+		logger.debug("    capacity: {}, endpos: {}",byteBuffer.capacity(), endpos);
 		byteBuffer.limit(endpos);
 		final ByteBuffer slice = byteBuffer.slice().order(byteBuffer.order());
 		// skipping bytes

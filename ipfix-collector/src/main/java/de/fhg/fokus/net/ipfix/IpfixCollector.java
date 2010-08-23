@@ -32,22 +32,6 @@ import de.fhg.fokus.net.ipfix.util.HexDump;
  * <b>Usage example</b>
  * </p>
  * 
- * <pre>
- * IpfixCollector ic = new IpfixCollector();
- * ic.registerDataRecordReader(IpfixRecordSourceIpv4PacketDeltaCount.getReader());
- * ic.addMessageListener(new IpfixMessageListener() {
- * 	&#064;Override
- * 	public void onMessage(IpfixMessage msg) {
- * 		logger.debug(msg + &quot;&quot;);
- * 		for (IpfixSet set : msg) {
- * 			for (IpfixRecord rec : set) {
- * 				logger.debug(rec + &quot;&quot;);
- * 			}
- * 		}
- * 	}
- * });
- * ic.bind(4739);
- * </pre>
  * 
  * @author FhG-FOKUS NETwork Research
  * 
@@ -123,6 +107,7 @@ public final class IpfixCollector {
 		// -- model --
 		private final Socket socket;
 		private boolean exit = false;
+		private Object attachment;
 		// -- aux --
 		private ByteBuffer prevBuffer = null;
 		// save remote address for disconnect event
@@ -140,7 +125,7 @@ public final class IpfixCollector {
 			while (!exit) {
 				int nbytes = in.read(bbuf);
 				if (nbytes > 0) {
-					
+					logger.debug("==> nbytes: {}",nbytes);
 					ByteBuffer byteBuffer = ByteBuffer.allocate(nbytes);
 					byteBuffer.put(bbuf, 0, nbytes).flip();
 
@@ -157,14 +142,19 @@ public final class IpfixCollector {
 					// Reading IPFIX messages
 					while (IpfixMessage.align(byteBuffer)) {
 						IpfixHeader hdr = new IpfixHeader(byteBuffer);
-//						logger.debug("prev: "+HexDump.toHexString(byteBuffer));
+//						if(hdr.getLength()+byteBuffer.position() - IpfixHeader.SIZE_IN_OCTETS > byteBuffer.capacity() ){
+//						// message was still not entirely received
+//							prevBuffer=byteBuffer;
+//							break;
+//						}
+						logger.debug("msg.len: {} ",hdr.getLength(), byteBuffer.position());
 						
 						final IpfixMessage msg = new IpfixMessage(
 								IpfixCollector.this.templateManager, hdr,
 								byteBuffer);
 //						logger.debug("msg:  "+HexDump.toHexString(msg.getMessageBuffer()));
 //						 dispatch message to listeners
-						dispatchEvent(CollectorEvents.MESSAGE, this, msg);
+//						dispatchEvent(CollectorEvents.MESSAGE, this, msg);
 					}
 				}
 				if (nbytes == -1) {
@@ -189,14 +179,20 @@ public final class IpfixCollector {
 		}
 
 		@Override
-		public SocketAddress getRemoteSocketAddress() {
-			return remoteAddress;
+		public Socket getSocket() {
+			return socket;
 		}
 
 		@Override
-		public SocketAddress getLocalSocketAddress() {
-			return socket.getLocalSocketAddress();
+		public Object getAttachment() {
+			return attachment;
 		}
+
+		@Override
+		public void setAttachment(Object obj) {
+			this.attachment = obj;
+		}
+
 	}
 
 	public void bind(int port) throws IOException {
@@ -210,7 +206,7 @@ public final class IpfixCollector {
 				public void run() {
 					ConnectionHandler handler = null;
 					try {
-						logger.debug("socket: " + socket);
+						logger.debug("==> socket: " + socket);
 						handler = new ConnectionHandler(socket);
 						clients.add(handler);
 						logger.debug("handler finished: {}",socket);
