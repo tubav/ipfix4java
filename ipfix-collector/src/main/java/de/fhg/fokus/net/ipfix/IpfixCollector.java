@@ -22,7 +22,6 @@ import de.fhg.fokus.net.ipfix.api.IpfixMessage;
 import de.fhg.fokus.net.ipfix.api.IpfixSet;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateManager;
 import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
-import de.fhg.fokus.net.ipfix.util.HexDump;
 
 /**
  * <p>
@@ -107,14 +106,22 @@ public final class IpfixCollector {
 		// -- model --
 		private final Socket socket;
 		private boolean exit = false;
-		private Object attachment;
+		private volatile Object attachment;
+		private long totalReceivedMessages=0;
 		// -- aux --
 		private ByteBuffer prevBuffer = null;
 		// save remote address for disconnect event
 		private SocketAddress remoteAddress =null;
-
-		public ConnectionHandler(Socket socket) throws IOException {
+		public ConnectionHandler(Socket socket){
 			this.socket = socket;
+			
+		}
+		/**
+		 * Starts handler, this will block thread until finished.
+		 * 	
+		 * @throws IOException
+		 */
+		public void start() throws IOException {
 			if(socket.isConnected()){
 				remoteAddress = socket.getRemoteSocketAddress();
 				dispatchEvent(CollectorEvents.CONNECTED, this, null);
@@ -125,7 +132,7 @@ public final class IpfixCollector {
 			while (!exit) {
 				int nbytes = in.read(bbuf);
 				if (nbytes > 0) {
-					logger.debug("==> nbytes: {}",nbytes);
+//					logger.debug("==> nbytes: {}",nbytes);
 					ByteBuffer byteBuffer = ByteBuffer.allocate(nbytes);
 					byteBuffer.put(bbuf, 0, nbytes).flip();
 
@@ -141,20 +148,25 @@ public final class IpfixCollector {
 
 					// Reading IPFIX messages
 					while (IpfixMessage.align(byteBuffer)) {
-						IpfixHeader hdr = new IpfixHeader(byteBuffer);
-//						if(hdr.getLength()+byteBuffer.position() - IpfixHeader.SIZE_IN_OCTETS > byteBuffer.capacity() ){
-//						// message was still not entirely received
-//							prevBuffer=byteBuffer;
-//							break;
-//						}
-						logger.debug("msg.len: {} ",hdr.getLength(), byteBuffer.position());
+						int pos = byteBuffer.position();
+						if(IpfixHeader.getLength(byteBuffer,pos) + pos > byteBuffer.limit()  ){
+							// message was still not entirely received
+//							logger.debug("message was not entirely received, waiting for more data, buffer.pos:{}",byteBuffer.position());
+//							logger.debug("msg len:{}, buffer.limit:{}",IpfixHeader.getLength(byteBuffer,pos),
+//									byteBuffer.limit());
+							prevBuffer=byteBuffer;
+							break;
+						}
 						
 						final IpfixMessage msg = new IpfixMessage(
-								IpfixCollector.this.templateManager, hdr,
-								byteBuffer);
+								IpfixCollector.this.templateManager, byteBuffer);
+						totalReceivedMessages++;
 //						logger.debug("msg:  "+HexDump.toHexString(msg.getMessageBuffer()));
 //						 dispatch message to listeners
-//						dispatchEvent(CollectorEvents.MESSAGE, this, msg);
+						dispatchEvent(CollectorEvents.MESSAGE, this, msg);
+					}
+					if(byteBuffer.hasRemaining()){
+						prevBuffer=byteBuffer;
 					}
 				}
 				if (nbytes == -1) {
@@ -193,6 +205,11 @@ public final class IpfixCollector {
 			this.attachment = obj;
 		}
 
+		@Override
+		public long totalReceivedMessages() {
+			return totalReceivedMessages;
+		}
+
 	}
 
 	public void bind(int port) throws IOException {
@@ -204,16 +221,15 @@ public final class IpfixCollector {
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {
-					ConnectionHandler handler = null;
+					ConnectionHandler handler = new ConnectionHandler(socket);
+					clients.add(handler);
 					try {
-						logger.debug("==> socket: " + socket);
-						handler = new ConnectionHandler(socket);
-						clients.add(handler);
-						logger.debug("handler finished: {}",socket);
-						dispatchEvent(CollectorEvents.DISCONNECTED, handler, null);
-
+						handler.start(); 
+						logger.debug("handler finished normally: {}",socket);
 					} catch (IOException e) {
 						logger.debug(e + "");
+					} finally {
+						dispatchEvent(CollectorEvents.DISCONNECTED, handler, null);
 					}
 				}
 			});
@@ -284,7 +300,7 @@ public final class IpfixCollector {
 			@Override
 			public void onMessage(IpfixConnectionHandler handler, IpfixMessage msg) {
 				System.out.println("oid: "
-						+ msg.getHeader().getObservationDomainID());
+						+ msg.getObservationDomainID());
 				// logger.debug(msg+"");
 				for (IpfixSet set : msg) {
 					for (Object rec : set) {
@@ -304,11 +320,12 @@ public final class IpfixCollector {
 				// TODO Auto-generated method stub
 
 			}
+
 		});
 
 		ic.bind(4739);
 		System.out.println("sleeping");
 		Thread.sleep(10000);
-
 	}
+	
 }

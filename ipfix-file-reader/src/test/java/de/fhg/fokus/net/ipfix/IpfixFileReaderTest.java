@@ -19,9 +19,6 @@ import de.fhg.fokus.net.ipfix.api.IpfixFieldSpecifier;
 import de.fhg.fokus.net.ipfix.api.IpfixMessage;
 import de.fhg.fokus.net.ipfix.api.IpfixSet;
 import de.fhg.fokus.net.ipfix.record.IpfixRecordSourceIpv4PacketDeltaCount;
-import eu.fp7_prism.backend.ipfix.model.IpfixRecordAsdfAsDelay;
-import eu.fp7_prism.backend.ipfix.model.IpfixRecordAsdfRtt;
-import eu.fp7_prism.backend.ipfix.model.IpfixRecordScope01;
 
 /**
  * 
@@ -35,16 +32,16 @@ public class IpfixFileReaderTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-//		fileReader = new IpfixFileReader(getIpfixFile("ok-01.ipfix"));
+		fileReader = new IpfixFileReader(getIpfixFile("ok-01.ipfix"));
 //		fileReader = new IpfixFileReader(getIpfixFile("rttexport.ipfix"));
-		fileReader = new IpfixFileReader(getIpfixFile("impd4e.ipfix"));
+//		fileReader = new IpfixFileReader(getIpfixFile("impd4e.ipfix"));
 
 		fileReader.registerDataRecordReader(IpfixRecordSourceIpv4PacketDeltaCount.getReader());
 
 		//		fileReader = new IpfixFileReader(getIpfixFile("ibc-01.ipfix"));
-		fileReader.registerDataRecordReader(IpfixRecordAsdfRtt.getReader());
-		fileReader.registerDataRecordReader(IpfixRecordAsdfAsDelay.getReader());
-		fileReader.registerDataRecordReader(IpfixRecordScope01.getReader());
+//		fileReader.registerDataRecordReader(IpfixRecordAsdfRtt.getReader());
+//		fileReader.registerDataRecordReader(IpfixRecordAsdfAsDelay.getReader());
+//		fileReader.registerDataRecordReader(IpfixRecordScope01.getReader());
 
 
 		//		reader = new IpfixFileReader(getIpfixFile("packetexport.ipfix"));
@@ -76,7 +73,6 @@ public class IpfixFileReaderTest {
 			if(i > maxMessages ){
 				return;
 			}
-			logger.debug(msg.toString());
 			for( IpfixSet set: msg ){
 				logger.debug(" +-{}",set);
 				for( Object rec: set ){

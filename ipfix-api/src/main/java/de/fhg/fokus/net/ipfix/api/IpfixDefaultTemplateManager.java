@@ -1,6 +1,5 @@
 package de.fhg.fokus.net.ipfix.api;
 
-import java.nio.ByteBuffer;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -95,12 +94,6 @@ public class IpfixDefaultTemplateManager implements IpfixTemplateManager {
 				ipfixTemplateRecord, reader);
 		mapSetIdRecordReader.put(setId, reader);
 
-	}
-
-	@Override
-	public void onUnknownSet(IpfixMessage msg, ByteBuffer setBuffer) {
-		logger.warn("Unknown set received. Did the IPFIX exporter send the template record correctly?");
-		
 	}
 
 }

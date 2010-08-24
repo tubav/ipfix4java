@@ -2,6 +2,9 @@ package de.fhg.fokus.net.ipfix.api;
 
 import java.nio.ByteBuffer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
 
 /**
@@ -10,6 +13,8 @@ import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
  * 
  */
 public interface IpfixIeCodec {
+	public static final Logger logger = LoggerFactory.getLogger(VariableLength.class);
+
 	public IpfixIeDataTypes getDataType();
 
 	/**
@@ -47,12 +52,6 @@ public interface IpfixIeCodec {
 	 * 
 	 */
 	public static class VariableLength {
-		// -- constants --
-		public static final int IDX_SMALL_LENGTH = 0;
-		public static final int IDX_IE_SMALL_LENGTH = 1;
-		public static final int IDX_LENGTH = 1;
-		public static final int IDX_IE_LENGTH = 3;
-		public static final int IE_LENGTH_GREATER_THAN_255 = 255;
 
 		/**
 		 * Reads variable length information elements.
@@ -61,31 +60,14 @@ public interface IpfixIeCodec {
 		 * @return
 		 */
 		public static ByteBuffer getByteBuffer(ByteBuffer setBuffer) {
-			ByteBuffer byteBuffer = null;
-			int length = ByteBufferUtil.getUnsignedByte(setBuffer,
-					IDX_SMALL_LENGTH);
-			int startPos = setBuffer.position();
-			if (length == IE_LENGTH_GREATER_THAN_255) {
-				length = ByteBufferUtil.getUnsignedShort(setBuffer,
-						IDX_IE_LENGTH);
-				startPos += IDX_IE_LENGTH;
-
-			} else {
-				startPos += IDX_IE_SMALL_LENGTH;
+			int len = ByteBufferUtil.getUnsignedByte(setBuffer, setBuffer.position());
+			setBuffer.position(setBuffer.position()+1);
+			if( len == 0xff ){
+				len = ByteBufferUtil.getUnsignedShort(setBuffer, setBuffer.position());
+				setBuffer.position(setBuffer.position()+2);
 
 			}
-			final int endPos = startPos + length;
-			// slicing
-			final int limit = setBuffer.limit();
-			setBuffer.position(startPos).limit(endPos);
-			byteBuffer = setBuffer.slice();
-			// "consuming" bytes
-			setBuffer.position(endPos);
-			setBuffer.limit(limit);
-			return byteBuffer;
-
+			return ByteBufferUtil.sliceAndSkip(setBuffer, len);
 		}
-
 	}
-
 }

@@ -13,5 +13,6 @@ public interface IpfixConnectionHandler {
 	public Socket getSocket();
 	public Object getAttachment();
 	public void setAttachment(Object obj);
+	public long totalReceivedMessages();
 	
 }

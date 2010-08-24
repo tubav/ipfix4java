@@ -35,80 +35,45 @@ public class IpfixHeader {
 	public static final int IDX_SEQUENCE_NUMBER = 8;
 	public static final int IDX_OBSERVATION_DOMAIN_ID = 12;
 
-	// -- model --
-	private final ByteBuffer byteBuffer;
 	/**
 	 * IPFIX header size in octets
 	 */
 	public static final int SIZE_IN_OCTETS = 16;
-	public IpfixHeader(byte[] bytes){
-		// TODO handle size error
-		this.byteBuffer = ByteBuffer.allocate(SIZE_IN_OCTETS);
-		this.byteBuffer.put(bytes);
-	}
-	
-	public IpfixHeader(ByteBuffer fileBuffer) {
 
-		this.byteBuffer = ByteBufferUtil.sliceAndSkip(fileBuffer,
-				SIZE_IN_OCTETS);
-
-	}
-
-	public int getVersion() {
+	public static  int getVersion(ByteBuffer byteBuffer ) {
 		return ByteBufferUtil.getUnsignedShort(byteBuffer, IDX_VERSION);
 	}
-
-	public IpfixHeader setVersion(Integer version) {
-		ByteBufferUtil.putUnsignedShort(byteBuffer, IDX_VERSION, version);
-		return this;
+	/**
+	 * Get IPFIX message length from position, buffer state won't be changed.
+	 * 
+	 * @param byteBuffer
+	 * @param pos
+	 * @return ipfix message length from reference message starting position
+	 */
+	public static int getLength(ByteBuffer byteBuffer, int pos ) {
+		return ByteBufferUtil.getUnsignedShort(byteBuffer, pos+IDX_LENGTH);
 	}
 
-	public int getLength() {
+	public static int getLength(ByteBuffer byteBuffer ) {
 		return ByteBufferUtil.getUnsignedShort(byteBuffer, IDX_LENGTH);
 	}
 
-	public IpfixHeader setLength(Integer length) {
-		ByteBufferUtil.putUnsignedShort(byteBuffer, IDX_LENGTH, length);
-		return this;
-	}
-
-	public long getExportTime() {
+	public static long getExportTime(ByteBuffer byteBuffer) {
 		return ByteBufferUtil.getUnsignedInt(byteBuffer, IDX_EXPORT_TIME);
 
 	}
-
-	public IpfixHeader setExportTime(long exportTime) {
-		ByteBufferUtil.putUnsignedInt(byteBuffer, IDX_EXPORT_TIME, exportTime);
-		return this;
-	}
-
-	public long getSequenceNumber() {
+	public static long getSequenceNumber(ByteBuffer byteBuffer) {
 		return ByteBufferUtil.getUnsignedInt(byteBuffer, IDX_SEQUENCE_NUMBER);
 
 	}
-
-	public IpfixHeader setSequenceNumber(long sequenceNumber) {
-		ByteBufferUtil.putUnsignedInt(byteBuffer, IDX_SEQUENCE_NUMBER,
-				sequenceNumber);
-		return this;
-	}
-
-	public long getObservationDomainID() {
+	public static long getObservationDomainID(ByteBuffer byteBuffer) {
 		return ByteBufferUtil.getUnsignedInt(byteBuffer,
 				IDX_OBSERVATION_DOMAIN_ID);
 	}
-
-	public IpfixHeader setObservationDomainID(long observationDomainID) {
-		ByteBufferUtil.putUnsignedInt(byteBuffer, IDX_OBSERVATION_DOMAIN_ID,
-				observationDomainID);
-		return this;
-	}
-
-	@Override
-	public String toString() {
+	public static String toString( ByteBuffer byteBuffer ) {
 		return String.format("hdr:{v:%d, len:%d, et:%d, sn:%d, oid:%d}",
-				getVersion(), getLength(), getExportTime(),
-				getSequenceNumber(), getObservationDomainID());
+				getVersion(byteBuffer), getLength(byteBuffer), getExportTime(byteBuffer),
+				getSequenceNumber(byteBuffer), getObservationDomainID(byteBuffer));
 	}
 
 }

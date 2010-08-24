@@ -22,6 +22,7 @@ public class IpfixSet implements Iterable<Object> {
 	private final IpfixSetHeader header;
 	private ByteBuffer setBuffer;
 	private IpfixSetType type;
+	private final IpfixMessage msg; // won't be used here, just passed through to delegated decoding
 	// -- management --
 	private final IpfixTemplateManager templateManager;
 	private final Statistics stats;
@@ -42,9 +43,8 @@ public class IpfixSet implements Iterable<Object> {
 			return false;
 		}
 	};
-	private final IpfixMessage msg;
 	public IpfixSet(IpfixMessage msg, IpfixTemplateManager templateManager,
-			IpfixSetHeader header, ByteBuffer messageBuffer) {
+			IpfixSetHeader header, ByteBuffer setsBuffer) {
 		this.msg = msg;
 		this.header = header;
 		this.templateManager = templateManager;
@@ -53,8 +53,8 @@ public class IpfixSet implements Iterable<Object> {
 			throw new RuntimeException("Set length is 0! At "+this.stats.globalBufferPosition);
 		}
 		
-		this.setBuffer = ByteBufferUtil.sliceAndSkip(messageBuffer, this.header.getLength() -IpfixSetHeader.SIZE_IN_OCTETS);
-		stats.setBufferPosition = messageBuffer.position();
+		this.setBuffer = ByteBufferUtil.sliceAndSkip(setsBuffer, this.header.getLength() -IpfixSetHeader.SIZE_IN_OCTETS);
+		stats.setBufferPosition = setsBuffer.position();
 		//
 		this.type = IpfixSetType.getSetType(this.header.getSetId());
 		// Setting up record iterator
@@ -80,7 +80,8 @@ public class IpfixSet implements Iterable<Object> {
 						if (recordReader == null) {
 							if( recordSpecifier==null){
 								// Skipping unknown set
-								IpfixSet.this.templateManager.onUnknownSet(IpfixSet.this.msg, setBuffer);
+								logger.debug("Got unknown set, did the exporter send all template records?");
+								IpfixSet.this.msg.incNumberOfunknownSets();
 								return false;
 							}
 							if (  !recordSpecifier.isVariableLength()) {

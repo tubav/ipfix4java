@@ -14,7 +14,8 @@
 			Expert Review
 			<xref type="rfc" data="rfc2434" />
 			, i.e. review by one of a group of experts
-			designated by an IETF Operations and Management Area Director.
+			designated by an IETF
+			Operations and Management Area Director.
 		</note>
 		<record>
 			<name>PtSystemCpuIdle</name>
@@ -44,7 +45,8 @@
 			<dataTypeSemantics>quantity</dataTypeSemantics>
 			<elementId>342</elementId>
 			<status>current</status>
-			<description>percentage of CPU used in user level (application)</description>
+			<description>percentage of CPU used in user level (application)
+			</description>
 		</record>
 
 		<record>
@@ -55,7 +57,8 @@
 			<dataTypeSemantics>quantity</dataTypeSemantics>
 			<elementId>343</elementId>
 			<status>current</status>
-			<description>percentage of CPU used in system level (kernel)</description>
+			<description>percentage of CPU used in system level (kernel)
+			</description>
 		</record>
 		<record>
 			<name>PtProcessMemVzs</name>
@@ -65,7 +68,8 @@
 			<dataTypeSemantics>quantity</dataTypeSemantics>
 			<elementId>344</elementId>
 			<status>current</status>
-			<description>the process virtual memory used in kilobytes</description>
+			<description>the process virtual memory used in kilobytes
+			</description>
 		</record>
 		<record>
 			<name>PtProcessMemRss</name>
@@ -97,8 +101,36 @@
 			<status>current</status>
 			<description>number of packets received by pcap</description>
 		</record>
-
-
+		<record>
+			<name>PtMessageId</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>unsigned32</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>348</elementId>
+			<status>current</status>
+			<description>message id</description>
+		</record>
+		<record>
+			<name>PtMessageValue</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>unsigned32</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>349</elementId>
+			<status>current</status>
+			<description>generic value</description>
+		</record>
+		<record>
+			<name>PtMessage</name>
+			<elementId>350</elementId>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>octetArray</dataType>
+			<group>none</group>
+			<dataTypeSemantics>default</dataTypeSemantics>
+			<status>current</status>
+			<description>Generic message (var len)</description>
+		</record>
 	</registry>
 	<people />
 </registry>

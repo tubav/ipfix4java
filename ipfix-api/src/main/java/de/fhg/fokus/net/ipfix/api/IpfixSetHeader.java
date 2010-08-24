@@ -36,10 +36,11 @@ public class IpfixSetHeader {
 	 */
 	public IpfixSetHeader(ByteBuffer messageBuffer) {
 		// slicing
-		messageBuffer.limit(messageBuffer.position() + SIZE_IN_OCTETS);
-		ByteBuffer bbuf = messageBuffer.slice();
-		messageBuffer.position(messageBuffer.limit()).limit(
-				messageBuffer.capacity());
+		ByteBuffer bbuf = ByteBufferUtil.sliceAndSkip(messageBuffer, SIZE_IN_OCTETS);
+//		messageBuffer.limit(messageBuffer.position() + SIZE_IN_OCTETS);
+//		ByteBuffer bbuf = messageBuffer.slice();
+//		messageBuffer.position(messageBuffer.limit()).limit(
+//				messageBuffer.capacity());
 		// reading
 		this.setId = ByteBufferUtil.getUnsignedShort(bbuf, IDX_SETID);
 		this.length = ByteBufferUtil.getUnsignedShort(bbuf, IDX_LENGTH);

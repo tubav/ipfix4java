@@ -8,26 +8,15 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.fhg.fokus.net.ipfix.api.Ipfix;
 import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
-import de.fhg.fokus.net.ipfix.api.IpfixDataRecordSpecifier;
 import de.fhg.fokus.net.ipfix.api.IpfixDefaultTemplateManager;
-import de.fhg.fokus.net.ipfix.api.IpfixFieldSpecifier;
-import de.fhg.fokus.net.ipfix.api.IpfixHeader;
-import de.fhg.fokus.net.ipfix.api.IpfixIe;
 import de.fhg.fokus.net.ipfix.api.IpfixMessage;
-import de.fhg.fokus.net.ipfix.api.IpfixOptionsTemplateRecord;
-import de.fhg.fokus.net.ipfix.api.IpfixTemplateManager;
-import de.fhg.fokus.net.ipfix.api.IpfixTemplateRecord;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateManager.Statistics;
-import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
 
 /**
  * IPFIX file reader implementation (on going). It uses memory mapped files and
@@ -113,9 +102,8 @@ public class IpfixFileReader implements Iterable<IpfixMessage> {
 											.toHexString(0xff & b));
 							continue;
 						}
-						IpfixHeader hdr = new IpfixHeader(byteBuffer);
-						next = new IpfixMessage(IpfixFileReader.this.templateManager, hdr,
-								byteBuffer);
+						// TODO test this
+						next = new IpfixMessage(IpfixFileReader.this.templateManager, byteBuffer);
 
 					} catch (Exception e) {
 						byte b = byteBuffer.get();

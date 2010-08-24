@@ -1,14 +1,11 @@
 package de.fhg.fokus.net.ipfix.model.ie;
 
-import java.nio.ByteBuffer;
-
 import de.fhg.fokus.net.ipfix.api.IpfixFieldSpecifier;
 import de.fhg.fokus.net.ipfix.api.IpfixIe;
 import de.fhg.fokus.net.ipfix.api.IpfixIeSemantics;
 import de.fhg.fokus.net.ipfix.api.IpfixIeStatus;
 import de.fhg.fokus.net.ipfix.api.IpfixIeUnits;
 import de.fhg.fokus.net.ipfix.api.codec.IpfixIeCodecUnsigned8;
-import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
 
 
 

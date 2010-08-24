@@ -35,16 +35,16 @@ public class PrismBackendIpfixBufferReaderTest {
 //		"nc-corrupted-03.ipfix"
 //		
 //	};
-	private static String[] expectedResults = {
-		"stats:{msgs:220, data:{nsets:219, nrecs:219}, tmpl:{nsets:10, nrecs:10}, " +
-		"otmpl:{nsets:1, nrecs:1}, pos:{file:8322, set:20}, invalidbytes:0}",
-		"stats:{msgs:220, data:{nsets:219, nrecs:219}, tmpl:{nsets:10, nrecs:10}, " +
-		"otmpl:{nsets:1, nrecs:1}, pos:{file:8331, set:20}, invalidbytes:9}",
-		"stats:{msgs:218, data:{nsets:216, nrecs:216}, tmpl:{nsets:10, nrecs:10}, " +
-		"otmpl:{nsets:1, nrecs:1}, pos:{file:8333, set:20}, invalidbytes:83}",
-		"stats:{msgs:216, data:{nsets:214, nrecs:214}, tmpl:{nsets:10, nrecs:10}, " +
-		"otmpl:{nsets:1, nrecs:1}, pos:{file:8333, set:20}, invalidbytes:155}",
-	};
+//	private static String[] expectedResults = {
+//		"stats:{msgs:220, data:{nsets:219, nrecs:219}, tmpl:{nsets:10, nrecs:10}, " +
+//		"otmpl:{nsets:1, nrecs:1}, pos:{file:8322, set:20}, invalidbytes:0}",
+//		"stats:{msgs:220, data:{nsets:219, nrecs:219}, tmpl:{nsets:10, nrecs:10}, " +
+//		"otmpl:{nsets:1, nrecs:1}, pos:{file:8331, set:20}, invalidbytes:9}",
+//		"stats:{msgs:218, data:{nsets:216, nrecs:216}, tmpl:{nsets:10, nrecs:10}, " +
+//		"otmpl:{nsets:1, nrecs:1}, pos:{file:8333, set:20}, invalidbytes:83}",
+//		"stats:{msgs:216, data:{nsets:214, nrecs:214}, tmpl:{nsets:10, nrecs:10}, " +
+//		"otmpl:{nsets:1, nrecs:1}, pos:{file:8333, set:20}, invalidbytes:155}",
+//	};
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		// nothing to do yet
@@ -72,7 +72,7 @@ public class PrismBackendIpfixBufferReaderTest {
 	
 	@Test
 	public void testPrismReader() throws IOException{
-		int i=0;
+//		int i=0;
 		for( String fname: filenames ){
 			Statistics stat = readfile(IpfixFileReaderTest.getIpfixFile(fname));
 			String statstr = stat+"";

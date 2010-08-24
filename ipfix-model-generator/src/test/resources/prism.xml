@@ -105,9 +105,6 @@
 			<status>current</status>
 			<description>AES 256 Encrypted data (var length)</description>
 		</record>
-
-
-
 		<record>
 			<name>KeyShareIV</name>
 			<elementId>339</elementId>
@@ -129,8 +126,6 @@
 			<status>current</status>
 			<description>AES 256 keyshare (36 octets)</description>
 		</record>
-
-
 
 	</registry>
 	<people />

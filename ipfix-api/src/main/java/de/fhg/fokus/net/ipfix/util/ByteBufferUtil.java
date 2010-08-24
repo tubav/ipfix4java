@@ -26,6 +26,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ByteBufferUtil {
 	public static final int SHORT_SIZE_IN_BYTES = Short.SIZE / 8;
+	private static final Logger logger = LoggerFactory.getLogger(ByteBufferUtil.class);
 	
 	// hide constructor
 	private ByteBufferUtil(){
@@ -90,18 +91,42 @@ public class ByteBufferUtil {
 	 * @param byteBuffer
 	 * @param length
 	 */
-	private static final Logger logger = LoggerFactory.getLogger(ByteBufferUtil.class);
+//	private static final Logger logger = LoggerFactory.getLogger(ByteBufferUtil.class);
+	/**
+	 * Returns a sliced buffer with "length" bytes. After this call the input
+	 * byte buffer position is set "length" bytes further.  
+	 * @param byteBuffer
+	 * @param length
+	 * @return a sliced byte buffer
+	 * @throws ArrayIndexOutOfBoundsException if position + length > capacity
+	 */
 	public static ByteBuffer sliceAndSkip(ByteBuffer byteBuffer, int length ){
-		final int endpos = byteBuffer.position() + length;
+		int endpos = byteBuffer.position() + length;
 		final int limit = byteBuffer.limit();
-		logger.debug("length: {}, limit: {}, position:"+byteBuffer.position(),length,limit);
-		logger.debug("    capacity: {}, endpos: {}",byteBuffer.capacity(), endpos);
+//		logger.debug("length: {}, limit: {}, position:"+byteBuffer.position(),length,limit);
+//		logger.debug("    capacity: {}, endpos: {}",byteBuffer.capacity(), endpos);
+		if(endpos > limit){
+			logger.error("invalid length, endpos:{}, limit:{} ",endpos, limit);
+			endpos=limit;
+		}
 		byteBuffer.limit(endpos);
 		final ByteBuffer slice = byteBuffer.slice().order(byteBuffer.order());
 		// skipping bytes
 		byteBuffer.limit(limit).position(endpos);
 		return slice;
 	}
+	/**
+	 * Skip "length" bytes and return a sliced version of the input buffer. The input buffer
+	 * position is set "length" bytes further. 
+	 * @param length
+	 * @param byteBuffer
+	 * @return
+	 */
+	public static ByteBuffer skipAndSlice( int length, ByteBuffer byteBuffer ){
+		byteBuffer.position(byteBuffer.position()+length);
+		return byteBuffer.slice();
+	}
+	
 	
 	/**
 	 * Slice buffer using current position and length. No checks are done
