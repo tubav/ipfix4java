@@ -7,6 +7,20 @@
 	<version>0.9-SNAPSHOT</version>
 	<description>IPFIX file reader implementation.
 	</description>
+	<distributionManagement>
+		<repository>
+			<id>pt</id>
+			<url>${pt.releases.repo.url}</url>
+		</repository>
+		<snapshotRepository>
+			<id>pt</id>
+			<url>${pt.snapshots.repo.url}</url>
+		</snapshotRepository>
+		<site>
+			<id>pt-site</id>
+			<url>${pt.sites.deploy.url}</url>
+		</site>
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>de.fhg.fokus.net</groupId>
