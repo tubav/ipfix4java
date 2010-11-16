@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateManager.Statistics;
 import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
+import de.fhg.fokus.net.ipfix.util.HexDump;
 
 /**
  * @author FhG-FOKUS NETwork Research
@@ -79,9 +80,13 @@ public class IpfixSet implements Iterable<Object> {
 					if (setBuffer.hasRemaining()) {
 						if (recordReader == null) {
 							if( recordSpecifier==null){
-								// Skipping unknown set
-								logger.debug("Got unknown set, did the exporter send all template records?");
 								IpfixSet.this.msg.incNumberOfunknownSets();
+								// Skipping unknown set
+								logger.debug("Got unknown set, did the exporter " +
+										"send all template records? setid: {}, hexdump:{}",
+										setId,
+										HexDump.toHexString(setBuffer.slice()));
+								
 								return false;
 							}
 							if (  !recordSpecifier.isVariableLength()) {

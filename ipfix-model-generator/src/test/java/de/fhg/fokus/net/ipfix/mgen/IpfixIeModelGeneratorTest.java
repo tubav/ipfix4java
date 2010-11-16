@@ -47,7 +47,9 @@ public class IpfixIeModelGeneratorTest {
 	public void testGenerateEnterprise() throws IOException{
 		logger.debug("IPFIX IE model generator test: ENTERPRISE");
 //		File modeFile= new File(TEST_DIR,"prism.xml");
-		File modeFile= new File(TEST_DIR,"pt.xml");
+//		File modeFile= new File(TEST_DIR,"pt.xml");
+		File modeFile= new File(TEST_DIR,"queuesync.xml");
+		
 		
 		
 		TextTemplate txtTemplate = new TextTemplate(IpfixIeTmpl.FILE);
@@ -55,7 +57,7 @@ public class IpfixIeModelGeneratorTest {
 		IanaRegistry ianaRegistry = (IanaRegistry) xstream.fromXML(fis);
 		
 		IpfixIeModelGenerator gen = new IpfixIeModelGenerator(txtTemplate, ianaRegistry
-		, "de.fhg.fokus.net.ipfix.model.ie.fokus.pt",new File("target","generated-sources"));
+		, "de.fhg.fokus.net.ipfix.model.ie.fokus.custom",new File("target","generated-sources"));
 		gen.generate();
 	}
 	@Test

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ipfix.xsl"?>
+<?oxygen RNGSchema="ipfix.rng" type="xml"?>
+<registry xmlns="http://www.iana.org/assignments" id="ipfix">
+	<title>IPFIX IEs for QueueSync </title>
+	<created>2010-08-21</created>
+	<updated>2010-08-21</updated>
+	<registry id="ipfix-information-element-definitions">
+		<record>
+			<name>QueueFillLevel</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>float32</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>390</elementId>
+			<status>current</status>
+			<description>queue fill level</description>
+		</record>
+		<record>
+			<name>Bottleneck</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>float32</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>391</elementId>
+			<status>current</status>
+			<description>bottleneck</description>
+		</record>
+		<record>
+			<name>Freq</name>
+			<enterpriseNumber>12325</enterpriseNumber>
+			<dataType>float32</dataType>
+			<group>none</group>
+			<dataTypeSemantics>quantity</dataTypeSemantics>
+			<elementId>392</elementId>
+			<status>current</status>
+			<description>frequency</description>
+		</record>
+	</registry>
+	<people />
+</registry>
