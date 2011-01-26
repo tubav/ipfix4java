@@ -12,21 +12,24 @@
 		<module>ipfix-file-reader</module>
 		<module>ipfix-collector</module>
 	</modules>
-	  <distributionManagement>
-    <repository>
-      <id>pt</id>
-      <url>${pt.releases.repo.url}</url>
-    </repository>
-    <snapshotRepository>
-      <id>pt</id>
-      <url>${pt.snapshots.repo.url}</url>
-    </snapshotRepository>
-    <site>
-      <id>pt-site</id>
-      <url>${pt.sites.deploy.url}</url>
-    </site>
-  </distributionManagement>
-	
+	<distributionManagement>
+		<repository>
+			<id>pt</id>
+			<url>${pt.releases.repo.url}</url>
+		</repository>
+		<snapshotRepository>
+			<id>pt</id>
+			<url>${pt.snapshots.repo.url}</url>
+		</snapshotRepository>
+		<site>
+			<id>pt-site</id>
+			<url>${pt.sites.deploy.url}</url>
+		</site>
+	</distributionManagement>
+	<description>Java implementation of the IPFIX protocol</description>
+	<url>https://svnsrv.fokus.fraunhofer.de/cc/ccnet/pt/wiki/IPFIX4Java
+	</url>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -44,4 +47,15 @@
 			</plugin>
 		</plugins>
 	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>
