@@ -27,9 +27,6 @@ import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
  * <p>
  * IPFIX Collector
  * </p>
- * <p>
- * <b>Usage example</b>
- * </p>
  * 
  * 
  * @author FhG-FOKUS NETwork Research
