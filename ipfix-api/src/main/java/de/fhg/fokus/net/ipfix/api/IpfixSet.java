@@ -66,10 +66,13 @@ public class IpfixSet implements Iterable<Object> {
 		case DATA:
 			stats.numberOfDataSets++;
 			final int setId = this.header.getSetId();
+                        logger.debug("set id: " + setId);
 			final IpfixDataRecordReader recordReader = templateManager
 					.getDataRecordReader(setId);
+                        logger.debug("reader: "+recordReader);
 			final IpfixDataRecordSpecifier recordSpecifier = templateManager
 					.getDataRecordSpecifier(setId);
+                        logger.debug("record spec: " + recordSpecifier);
 			iterator = new RecordIterator() {
 
 				@Override
