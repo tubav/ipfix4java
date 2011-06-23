@@ -44,8 +44,8 @@ public class IpfixCollectorTest {
 			}
 		});
 		
-		ic.bind(4739);
-		Thread.sleep(sleep*1000);
+		//ic.bind(4739);
+		//Thread.sleep(sleep*1000);
 		ic.shutdow();
 		
 		
