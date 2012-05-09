@@ -94,8 +94,15 @@ public class IpfixSet implements Iterable<Object> {
 					if (setBuffer.hasRemaining()) {
 						// there have to be a record specifier for a received template
 						if ( null != recordSpecifier ) {
+							// mark the position of this buffer for the fall back handling
+							setBuffer.mark();
 							// TODO: check for type cast
-							IpfixDataRecord dataRecord = new IpfixDataRecord(setBuffer, (IpfixTemplateRecord) recordSpecifier);
+							// decode message fields, described by the received record specifier
+							// a.k.a. IpfixTemplateRecord TODO: no type cast here is not good
+							IpfixDataRecord dataRecord = 
+									new IpfixDataRecord(setBuffer, (IpfixTemplateRecord) recordSpecifier);
+							// store position to bypass decoding errors done by getRecord(..., ByteBuffer) 
+							int position = setBuffer.position();
 							//logger.debug(dataRecord.toString());
 							if( null != recordReader ) {
 								// if there is a registered reader call its 'getRecord' method
@@ -105,7 +112,14 @@ public class IpfixSet implements Iterable<Object> {
 								next = recordReader.getRecord(IpfixSet.this.msg, dataRecord);
 								// fall back to old handling
 								if( null == next ) {
+									// reset the buffer, because its decoded again in the old
+									// getRecord method
+									setBuffer.reset();
 									next = recordReader.getRecord(IpfixSet.this.msg, setBuffer);
+									// restore position, should be correct, but nobody knows
+									// what will happen during decoding
+									// 'IpfixDataRecord used to decode correctly'
+									setBuffer.position(position);
 								}
 								stats.numberOfDataRecords++;
 							}
@@ -134,6 +148,7 @@ public class IpfixSet implements Iterable<Object> {
 		// Reading template records
 		// -------------------------------------------------------------------
 		case TEMPLATE:
+			//TODO: still some work needed, to make this better
 			logger.debug("+- TEMPLATE Set received");
 			stats.numberOfTemplateSets++;
 			iterator = new RecordIterator() {
