@@ -21,7 +21,6 @@ import de.fhg.fokus.net.ipfix.api.IpfixMessage;
 import de.fhg.fokus.net.ipfix.api.IpfixSet;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateManager;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateManagerImpl;
-import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
 
 /**
  * <p>
@@ -49,6 +48,10 @@ public final class IpfixCollector {
 	private CopyOnWriteArrayList<ConnectionHandler> clients = new CopyOnWriteArrayList<ConnectionHandler>();
 	private CopyOnWriteArrayList<ServerSocket> servers = new CopyOnWriteArrayList<ServerSocket>();
 
+	// port to listen for incomming connections
+	// default 4379
+	private int servicePort = 4379;
+	
 	private enum CollectorEvents {
 		CONNECTED,
 		DISCONNECTED,
@@ -110,7 +113,6 @@ public final class IpfixCollector {
 		private volatile Object attachment;
 		private long totalReceivedMessages=0;
 		// -- aux --
-		private ByteBuffer prevBuffer = null;
 		// save remote address for disconnect event
 		@SuppressWarnings("unused")
 		private SocketAddress remoteAddress = null;
@@ -130,24 +132,27 @@ public final class IpfixCollector {
 			}
 			InputStream in = socket.getInputStream();
 			byte[] bbuf = new byte[1024];
-			// ByteBuffer byteBuffer;
+			// create an initial empty previous byte buffer
+			ByteBuffer prevBuffer = ByteBuffer.allocate(0);
+			
 			while (!exit) {
+				// this block until something is read
 				int nbytes = in.read(bbuf);
 				if (nbytes > 0) {
 //					logger.debug("==> nbytes: {}",nbytes);
-					ByteBuffer byteBuffer = ByteBuffer.allocate(nbytes);
-					byteBuffer.put(bbuf, 0, nbytes).flip();
-
-					// handle previous read
-					if( prevBuffer !=null ){
-						byteBuffer = ByteBufferUtil.concat( prevBuffer, byteBuffer );
-						prevBuffer=null;
-					}
+					// create a new buffer with an capacity of the previous buffer and
+					// the new read buffer
+					ByteBuffer byteBuffer = ByteBuffer.allocate(prevBuffer.remaining()+nbytes);
+					// copy previous buffer and read buffer to the working buffer
+					// and reset position
+					byteBuffer.put(prevBuffer).put(bbuf, 0, nbytes).flip();
+					
+					// check if buffer contains enough data
 					if( !IpfixMessage.enoughData(byteBuffer)){
 						prevBuffer=byteBuffer;
 						continue;
 					}
-
+					
 					// Reading IPFIX messages
 					while (IpfixMessage.align(byteBuffer)) {
 						int pos = byteBuffer.position();
@@ -167,9 +172,8 @@ public final class IpfixCollector {
 //						 dispatch message to listeners
 						dispatchEvent(CollectorEvents.MESSAGE, this, msg);
 					}
-					if(byteBuffer.hasRemaining()){
-						prevBuffer=byteBuffer;
-					}
+					// the remaining byte buffer becomes the new previous buffer
+					prevBuffer=byteBuffer;
 				}
 				if (nbytes == -1) {
 					logger.debug("No more data available");
@@ -237,6 +241,19 @@ public final class IpfixCollector {
 				}
 			});
 		}
+	}
+	
+	public void start() {
+		executor.execute(new Runnable() {
+			public void run() {
+				try {
+					bind( servicePort );
+				}
+				catch( IOException ioe ) {
+					logger.debug(ioe.getMessage());
+				}
+			}
+		});
 	}
 
 	public void shutdow() {
@@ -329,6 +346,14 @@ public final class IpfixCollector {
 		ic.bind(4739);
 		System.out.println("sleeping");
 		Thread.sleep(10000);
+	}
+
+	public int getServicePort() {
+		return servicePort;
+	}
+
+	public void setServicePort(int servicePort) {
+		this.servicePort = servicePort;
 	}
 	
 }
