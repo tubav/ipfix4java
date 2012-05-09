@@ -14,9 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
-import de.fhg.fokus.net.ipfix.api.IpfixDefaultTemplateManager;
 import de.fhg.fokus.net.ipfix.api.IpfixMessage;
+import de.fhg.fokus.net.ipfix.api.IpfixTemplateManager;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateManager.Statistics;
+import de.fhg.fokus.net.ipfix.api.IpfixTemplateManagerImpl;
 
 /**
  * IPFIX file reader implementation (on going). It uses memory mapped files and
@@ -38,7 +39,8 @@ public class IpfixFileReader implements Iterable<IpfixMessage> {
 	private final MappedByteBuffer fileBuffer;
 	private boolean autoDispose = true;
 	// -- management --
-	private final IpfixDefaultTemplateManager templateManager = new IpfixDefaultTemplateManager();
+//	private final IpfixDefaultTemplateManager templateManager = new IpfixDefaultTemplateManager();
+	private final IpfixTemplateManager templateManager = new IpfixTemplateManagerImpl();
 	private final Statistics stats = templateManager.getStatistics();
 	
 	public IpfixFileReader(File file) throws IOException {

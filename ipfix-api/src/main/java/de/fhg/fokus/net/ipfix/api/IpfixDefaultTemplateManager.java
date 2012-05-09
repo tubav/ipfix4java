@@ -81,8 +81,7 @@ public class IpfixDefaultTemplateManager implements IpfixTemplateManager {
 	@Override
 	public void registerTemplateRecord(IpfixTemplateRecord ipfixTemplateRecord) {
 		stats.numberOfTemplateRecords++;
-		IpfixDataRecordReader reader = mapTemplateUidRecordReader
-				.get(ipfixTemplateRecord.getUid());
+		IpfixDataRecordReader reader = mapTemplateUidRecordReader.get(ipfixTemplateRecord.getUid());
 		int setId = ipfixTemplateRecord.getTemplateId();
 		mapSetId2DataRecordSpecifier.put(setId, ipfixTemplateRecord);
 		if (reader == null) {

@@ -17,8 +17,7 @@ import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
  */
 public final class IpfixMessage implements Iterable<IpfixSet> {
 	// -- sys --
-	private final static Logger logger = LoggerFactory
-			.getLogger(IpfixMessage.class);
+	private final static Logger logger = LoggerFactory.getLogger(IpfixMessage.class);
 	// -- model --
 	private ByteBuffer messageBuffer;
 	private short numberOfunknownSets = 0;
@@ -27,8 +26,7 @@ public final class IpfixMessage implements Iterable<IpfixSet> {
 	private final IpfixTemplateManager templateManager;
 	private final Statistics stats;
 
-	public IpfixMessage(IpfixTemplateManager templateManager,
-			ByteBuffer byteBuffer) {
+	public IpfixMessage(IpfixTemplateManager templateManager, ByteBuffer byteBuffer) {
 		this.templateManager = templateManager;
 		this.stats = templateManager.getStatistics();
 		// slicing
@@ -46,20 +44,24 @@ public final class IpfixMessage implements Iterable<IpfixSet> {
 	}
 
 	/**
-	 * @return a sliced byte buffer of this message. Contents are shared,
-	 *         position and limit are not.
+	 * @return a sliced byte buffer of this message. 
+	 * Contents are shared, position and limit are not.
 	 */
 	public ByteBuffer getMessageBuffer() {
 		return messageBuffer.slice();
 	}
 
+	/**
+	 * @return an iterator over the available sets sent within this ipfix message
+	 */
 	public Iterator<IpfixSet> iterator() {
 		return new Iterator<IpfixSet>() {
-
-			private final ByteBuffer setsBuffer =ByteBufferUtil.skipAndSlice(IpfixHeader.SIZE_IN_OCTETS,messageBuffer);
+			
+			private final ByteBuffer setsBuffer = 
+					ByteBufferUtil.skipAndSlice(IpfixHeader.SIZE_IN_OCTETS, messageBuffer);
 			private IpfixSetHeader currentSetHeader;
 			private IpfixSet last = null, next = null;
-
+			
 			public boolean hasNext() {
 				if (next != null) {
 					return true;
@@ -67,9 +69,11 @@ public final class IpfixMessage implements Iterable<IpfixSet> {
 				if (setsBuffer.hasRemaining()) {
 					try {
 						currentSetHeader = new IpfixSetHeader(setsBuffer);
-						next = new IpfixSet(IpfixMessage.this, templateManager,
-								currentSetHeader, setsBuffer);
-
+						next = new IpfixSet( IpfixMessage.this
+											, templateManager
+											, currentSetHeader
+											, setsBuffer);
+						
 						return true;
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -79,7 +83,7 @@ public final class IpfixMessage implements Iterable<IpfixSet> {
 				}
 				return false;
 			}
-
+			
 			public IpfixSet next() {
 				if (next == null && !hasNext()) {
 					throw new NoSuchElementException();
@@ -88,11 +92,11 @@ public final class IpfixMessage implements Iterable<IpfixSet> {
 				next = null;
 				return last;
 			}
-
+			
 			public void remove() {
 				throw new UnsupportedOperationException("Cannot remove sets!");
 			}
-
+			
 		};
 	}
 

@@ -5,6 +5,7 @@
 	<artifactId>ipfix-collector</artifactId>
 	<name>IPFIX Collector</name>
 	<version>0.9-SNAPSHOT</version>
+
 	<distributionManagement>
 		<repository>
 			<id>pt</id>
@@ -19,6 +20,7 @@
 			<url>${pt.sites.deploy.url}</url>
 		</site>
 	</distributionManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>de.fhg.fokus.net</groupId>
@@ -45,6 +47,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -57,4 +60,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>

@@ -32,6 +32,8 @@ public class IpfixFileReaderTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		logger.debug("setUpBeforeClass()");
+		
 		fileReader = new IpfixFileReader(getIpfixFile("ok-01.ipfix"));
 //		fileReader = new IpfixFileReader(getIpfixFile("rttexport.ipfix"));
 //		fileReader = new IpfixFileReader(getIpfixFile("impd4e.ipfix"));

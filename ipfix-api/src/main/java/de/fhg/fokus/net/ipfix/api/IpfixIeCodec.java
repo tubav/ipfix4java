@@ -69,5 +69,25 @@ public interface IpfixIeCodec {
 			}
 			return ByteBufferUtil.sliceAndSkip(setBuffer, len);
 		}
+
+		/**
+		 * Reads variable length information elements. includes the length field.
+		 * 
+		 * @param setBuffer
+		 * @return
+		 */
+		public static ByteBuffer getRawByteBuffer(ByteBuffer setBuffer) {
+			int len = ByteBufferUtil.getUnsignedByte(setBuffer, setBuffer.position());
+			if( len == 0xff ){
+				len = ByteBufferUtil.getUnsignedShort(setBuffer, setBuffer.position()+1);
+				// add the length field to the slice
+				len += 3;
+			}
+			else {
+				// add the length field to the slice
+				len += 1;
+			}
+			return ByteBufferUtil.sliceAndSkip(setBuffer, len);
+		}
 	}
 }

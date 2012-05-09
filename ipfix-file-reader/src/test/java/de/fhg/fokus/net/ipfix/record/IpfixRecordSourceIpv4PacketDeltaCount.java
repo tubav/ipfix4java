@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.net.Inet4Address;
 import java.nio.ByteBuffer;
 
+import de.fhg.fokus.net.ipfix.api.IpfixDataRecord;
 import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
 import de.fhg.fokus.net.ipfix.api.IpfixMessage;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateForDataReader;
@@ -68,6 +69,11 @@ public class IpfixRecordSourceIpv4PacketDeltaCount  {
 		@Override
 		public IpfixTemplateForDataReader getTemplate() {
 			return template;
+		}
+		@Override
+		public Object getRecord(IpfixMessage msg, IpfixDataRecord dataRecord) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	};
 	public final static IpfixDataRecordReader getReader(){

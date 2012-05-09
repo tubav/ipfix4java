@@ -16,11 +16,11 @@ import org.slf4j.LoggerFactory;
 import de.fhg.fokus.net.ipfix.api.IpfixCollectorListener;
 import de.fhg.fokus.net.ipfix.api.IpfixConnectionHandler;
 import de.fhg.fokus.net.ipfix.api.IpfixDataRecordReader;
-import de.fhg.fokus.net.ipfix.api.IpfixDefaultTemplateManager;
 import de.fhg.fokus.net.ipfix.api.IpfixHeader;
 import de.fhg.fokus.net.ipfix.api.IpfixMessage;
 import de.fhg.fokus.net.ipfix.api.IpfixSet;
 import de.fhg.fokus.net.ipfix.api.IpfixTemplateManager;
+import de.fhg.fokus.net.ipfix.api.IpfixTemplateManagerImpl;
 import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
 
 /**
@@ -37,14 +37,18 @@ public final class IpfixCollector {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	// TODO used multiple tread pools
 	private ExecutorService executor = Executors.newCachedThreadPool();
+	// TODO: just for debugging
+	//private ExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
 	// -- ctrl --
-	private final IpfixDefaultTemplateManager templateManager = new IpfixDefaultTemplateManager();
+	//private final IpfixDefaultTemplateManager templateManager = new IpfixDefaultTemplateManager();
+	private final IpfixTemplateManager templateManager = new IpfixTemplateManagerImpl();
 
 	// -- model --
 	private CopyOnWriteArrayList<IpfixCollectorListener> eventListeners = new CopyOnWriteArrayList<IpfixCollectorListener>();
 	private CopyOnWriteArrayList<ConnectionHandler> clients = new CopyOnWriteArrayList<ConnectionHandler>();
 	private CopyOnWriteArrayList<ServerSocket> servers = new CopyOnWriteArrayList<ServerSocket>();
+
 	private enum CollectorEvents {
 		CONNECTED,
 		DISCONNECTED,
@@ -108,7 +112,8 @@ public final class IpfixCollector {
 		// -- aux --
 		private ByteBuffer prevBuffer = null;
 		// save remote address for disconnect event
-		private SocketAddress remoteAddress =null;
+		@SuppressWarnings("unused")
+		private SocketAddress remoteAddress = null;
 		public ConnectionHandler(Socket socket){
 			this.socket = socket;
 			
@@ -212,9 +217,10 @@ public final class IpfixCollector {
 	public void bind(int port) throws IOException {
 		final ServerSocket serverSocket = new ServerSocket(port);
 		servers.add(serverSocket);
+		logger.info("binding to {}",serverSocket);
 		while (true) {
-			logger.debug("binding to {}",serverSocket);
 			final Socket socket = serverSocket.accept();
+			logger.info("accept from {}", socket);
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {

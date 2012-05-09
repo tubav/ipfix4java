@@ -1,6 +1,8 @@
 package de.fhg.fokus.net.ipfix.api;
 
 import java.nio.ByteBuffer;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 
@@ -13,6 +15,7 @@ public class IpfixTemplateForDataReader {
 	// -- model --
 	private final ByteBuffer bbuf;
 	private final IpfixIe [] ies;
+	private final Map<IpfixFieldSpecifier, IpfixIe> mapFStoIE;
 	private final String uid;
 	private final int recordSize; // used for slicing record buffers
 	/**
@@ -22,13 +25,15 @@ public class IpfixTemplateForDataReader {
 	public IpfixTemplateForDataReader(IpfixIe ... ies  ) {
 		int capacity =0;
 		this.ies = ies;
+		this.mapFStoIE = new HashMap<IpfixFieldSpecifier, IpfixIe>(ies.length);
 		for( IpfixIe ie: this.ies ){
-			IpfixFieldSpecifier fld = ie.getFieldSpecifier();
-			capacity+=fld.getFieldSpecifierLength();
+			mapFStoIE.put(ie.getFieldSpecifier(), ie);
+			capacity += ie.getFieldSpecifier().getFieldSpecifierLength();
 		}
 		this.recordSize = capacity;
-		StringBuffer uidSbuf = new StringBuffer();
 		this.bbuf = ByteBuffer.allocate(capacity);
+		StringBuffer uidSbuf = new StringBuffer();
+
 		// copying field specifiers to buffer
 		for( IpfixIe ie: this.ies ){
 			IpfixFieldSpecifier fld = ie.getFieldSpecifier();
@@ -42,6 +47,8 @@ public class IpfixTemplateForDataReader {
 		
 	}
 	public IpfixIe [] getInformationElements(){
+		// TODO: maybe just use this list
+		// return (IpfixIe[]) mapFStoIE.values().toArray();
 		return ies;
 	}
 
@@ -57,6 +64,9 @@ public class IpfixTemplateForDataReader {
 	}
 	public int getRecordSize() {
 		return recordSize;
+	}
+	public boolean hasFieldSpecifier(IpfixFieldSpecifier fs) {
+		return mapFStoIE.containsKey(fs);
 	}
 	
 }

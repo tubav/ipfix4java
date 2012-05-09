@@ -25,8 +25,9 @@ import de.fhg.fokus.net.ipfix.util.ByteBufferUtil;
  */
 public class IpfixFieldSpecifier implements Comparable<IpfixFieldSpecifier> {
 	// -- sys --
-	private final static Logger logger = LoggerFactory
-			.getLogger(IpfixFieldSpecifier.class);
+	@SuppressWarnings("unused")
+	private final static Logger logger = LoggerFactory.getLogger(IpfixFieldSpecifier.class);
+	
 	// -- constants --
 	private static final int IDX_E_ID = 0;
 	private static final int IDX_FIELD_LENGTH = 2;
@@ -34,24 +35,39 @@ public class IpfixFieldSpecifier implements Comparable<IpfixFieldSpecifier> {
 	private static final int LENGTH_IN_OCTETS = 4;
 	private static final int LENGTH_ENTERPRISE_IN_OCTETS = 8;
 	private static final int RFC_NON_ENTERPRISE=0;
+
 	// -- model --
-	private final ByteBuffer bytebuffer;
+	private ByteBuffer bytebuffer;
 	private IpfixIe informationElement;
 	private boolean isScope = false;
+	
+	private short id = 0;
+	private int   ieLength = 0;
+	private long  enterpriseNumber = 0;
 
-	@Override
-	public String toString() {
-		if (informationElement != null) {
-			return String.format("%s", informationElement.getName());
-		}
-		return getUid();
+	private boolean isEnterprise = false;
+
+	private boolean hasChanged = false;
+
+	/**
+	 * Creates an IETF information element.
+	 */
+	public IpfixFieldSpecifier() {
+		this(RFC_NON_ENTERPRISE);
 	}
 
-	public String getUid() {
-		String scope = this.isScope?", scope:true":"";
-		return String.format("{id:%d, len:%d, en:%d%s}", getId(),
-				getIeLength(), getEnterpriseNumber(), scope);
+	/**
+	 * Creates an IETF or Enterprise information element.
+	 * 
+	 * @param isEnterprise
+	 */
+	public IpfixFieldSpecifier(long enterpriseNumber) {
+		setEnterpriseNumber(enterpriseNumber);
+		// reserve at least bytes 
+		this.bytebuffer = null;
+		this.hasChanged = true;
 	}
+
 	/**
 	 * Interpret next bytes as an ipfix field specifier. The record buffer position
 	 * is incremented accordingly.
@@ -60,70 +76,26 @@ public class IpfixFieldSpecifier implements Comparable<IpfixFieldSpecifier> {
 	 */
 	public IpfixFieldSpecifier(ByteBuffer recordBuffer) {
 		this.bytebuffer = recordBuffer.slice();
-		if (isEnterprise()) {
-			recordBuffer.position(recordBuffer.position()
-					+ LENGTH_ENTERPRISE_IN_OCTETS);
-			this.bytebuffer.limit(LENGTH_ENTERPRISE_IN_OCTETS);
-		} else {
-			recordBuffer.position(recordBuffer.position() + LENGTH_IN_OCTETS);
-			this.bytebuffer.limit(LENGTH_IN_OCTETS);
-		}
-	}
-	/**
-	 * Creates an IETF information element.
-	 */
-	public IpfixFieldSpecifier() {
-		this(RFC_NON_ENTERPRISE);
-	}
-	/**
-	 * Creates an IETF or Enterprise information element.
-	 * 
-	 * @param isEnterprise
-	 */
-	public IpfixFieldSpecifier(long enterpriseNumber) {
+
+		short en_id = bytebuffer.getShort(IDX_E_ID);
+		setEnterprise((en_id & 0x8000) != 0);
+		setId(en_id & 0x7FFF);
+		setFieldLength(ByteBufferUtil.getUnsignedShort(bytebuffer, IDX_FIELD_LENGTH));
 		
-		if (enterpriseNumber!=0) {
-			this.bytebuffer = ByteBuffer.allocate(LENGTH_ENTERPRISE_IN_OCTETS);
-			setEnterpriseNumber(enterpriseNumber);
-		} else {
-			this.bytebuffer = ByteBuffer.allocate(LENGTH_IN_OCTETS);
+		if( isEnterprise() ) {
+			setEnterpriseNumber(ByteBufferUtil.getUnsignedInt(bytebuffer, IDX_ENTERPRISE_NUMBER));
+			
+			this.bytebuffer.limit(LENGTH_ENTERPRISE_IN_OCTETS);
+			recordBuffer.position(recordBuffer.position() + LENGTH_ENTERPRISE_IN_OCTETS);
+		}
+		else {
+			this.bytebuffer.limit(LENGTH_IN_OCTETS);
+			recordBuffer.position(recordBuffer.position() + LENGTH_IN_OCTETS);
 		}
 	}
 
 	public short getId() {
-		return (short) (0x7FFF & bytebuffer.getShort(IDX_E_ID));
-	}
-
-	public IpfixFieldSpecifier setId(int id) {
-		bytebuffer.putShort(IDX_E_ID,
-				(short) (id | (bytebuffer.getShort(IDX_E_ID) & 0x8000)));
-		return this;
-	}
-
-	public long getEnterpriseNumber() {
-		if (isEnterprise() && bytebuffer.limit() >= LENGTH_ENTERPRISE_IN_OCTETS) {
-			return ByteBufferUtil.getUnsignedInt(bytebuffer,
-					IDX_ENTERPRISE_NUMBER);
-		} else {
-			return 0;
-		}
-	}
-
-	/**
-	 * Set enterprise number. Enterprise bit is also set if en != 0.
-	 * 
-	 * @param en
-	 * @return itself
-	 */
-	public IpfixFieldSpecifier setEnterpriseNumber(long en) {
-		if (bytebuffer.limit() >= LENGTH_ENTERPRISE_IN_OCTETS) {
-			ByteBufferUtil.putUnsignedInt(bytebuffer, IDX_ENTERPRISE_NUMBER , en);
-			setEnterprise(en != 0);
-		} else {
-			logger
-					.warn("Trying to set enterprise number on a too small field specifier buffer.");
-		}
-		return this;
+		return (short) this.id;
 	}
 
 	/**
@@ -136,7 +108,11 @@ public class IpfixFieldSpecifier implements Comparable<IpfixFieldSpecifier> {
 	 * @return length in octets
 	 */
 	public int getIeLength() {
-		return ByteBufferUtil.getUnsignedShort(bytebuffer, IDX_FIELD_LENGTH);
+		return this.ieLength;
+	}
+
+	public long getEnterpriseNumber() {
+		return this.enterpriseNumber;
 	}
 
 	/**
@@ -148,23 +124,57 @@ public class IpfixFieldSpecifier implements Comparable<IpfixFieldSpecifier> {
 		return isEnterprise() ? LENGTH_ENTERPRISE_IN_OCTETS : LENGTH_IN_OCTETS;
 	}
 
+	public String getUid() {
+		String scope = this.isScope?", scope:true":"";
+		return String.format("{id:%d, len:%d, en:%d%s}"
+							, getId()
+							, getIeLength()
+							, getEnterpriseNumber()
+							, scope
+							);
+	}
+
+	@Override
+	public String toString() {
+		if (informationElement != null) {
+			return String.format("%s", informationElement.getName());
+		}
+		return getUid();
+	}
+
+	public IpfixFieldSpecifier setId(int id) {
+		this.id = (short) id;
+		this.hasChanged = true;
+		return this;
+	}
+
+	/**
+	 * Set enterprise number. Enterprise bit is also set if en != 0.
+	 * 
+	 * @param en
+	 * @return itself
+	 */
+	public IpfixFieldSpecifier setEnterpriseNumber(long en) {
+		this.enterpriseNumber = en;
+		setEnterprise(0 != en);
+		this.hasChanged = true;
+		return this;
+	}
+
+	public IpfixFieldSpecifier setEnterprise(boolean isEnterprise) {
+		this.isEnterprise = isEnterprise;
+		this.hasChanged = true;
+		return this;
+	}
+
 	public IpfixFieldSpecifier setFieldLength(int fieldLength) {
-		ByteBufferUtil
-				.putUnsignedShort(bytebuffer, IDX_FIELD_LENGTH, fieldLength);
+		this.ieLength = fieldLength;
+		this.hasChanged = true;
 		return this;
 	}
 
 	public boolean isEnterprise() {
-		return (bytebuffer.getShort(IDX_E_ID) & 0x8000) > 0;
-	}
-
-	public IpfixFieldSpecifier setEnterprise(boolean isEnterprise) {
-		if (isEnterprise) {
-			bytebuffer.putShort(IDX_E_ID, (short) (bytebuffer.getShort(IDX_E_ID) | 0x8000));
-		} else {
-			bytebuffer.putShort(IDX_E_ID, (short) (bytebuffer.getShort(IDX_E_ID) & 0x7FFF));
-		}
-		return this;
+		return this.isEnterprise;
 	}
 
 	/**
@@ -173,31 +183,55 @@ public class IpfixFieldSpecifier implements Comparable<IpfixFieldSpecifier> {
 	 * @return
 	 */
 	public ByteBuffer getBytebuffer() {
+		if( null == this.bytebuffer || hasChanged) {
+			if( isEnterprise() ) {
+				this.bytebuffer = ByteBuffer.allocate(LENGTH_ENTERPRISE_IN_OCTETS);
+				ByteBufferUtil.putUnsignedInt( bytebuffer
+											, IDX_ENTERPRISE_NUMBER 
+											, this.enterpriseNumber);
+			}
+			else {
+				this.bytebuffer = ByteBuffer.allocate(LENGTH_IN_OCTETS);
+			}
+			if( isEnterprise() ) {
+				bytebuffer.putShort(IDX_E_ID, (short) (this.id | 0x8000));
+			} 
+			else {
+				bytebuffer.putShort(IDX_E_ID, (short) (this.id & 0x7FFF));
+			}
+			ByteBufferUtil.putUnsignedShort(bytebuffer, IDX_FIELD_LENGTH, this.ieLength);
+		}
+		//logger.debug("{} {}", bytebuffer.array(), bytebuffer.toString());
 		return bytebuffer;
 	}
 
 	@Override
 	public int hashCode() {
-		return bytebuffer.hashCode();
+		this.getBytebuffer().rewind();
+		return this.getBytebuffer().hashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof IpfixFieldSpecifier) {
 			IpfixFieldSpecifier that = (IpfixFieldSpecifier) obj;
-			return bytebuffer.equals(that.getBytebuffer());
-		} else {
+			// TODO: compare elements
+			//logger.debug("{} == {}", getBytebuffer().array(), that.getBytebuffer().array());
+			return getBytebuffer().equals(that.getBytebuffer());
+		} 
+		else {
 			return false;
 		}
 	}
 
 	@Override
 	public int compareTo(IpfixFieldSpecifier that) {
-		return bytebuffer.compareTo(that.getBytebuffer());
+		// TODO: compare elements
+		return getBytebuffer().compareTo(that.getBytebuffer());
 	}
 
 	public IpfixIe getInformationElement() {
-		return informationElement;
+		return this.informationElement;
 	}
 
 	public void setInformationElement(IpfixIe informationElement) {
