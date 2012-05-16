@@ -17,23 +17,68 @@ import org.slf4j.LoggerFactory;
 public class IpfixTemplateManagerImpl implements IpfixTemplateManager {
 	// -- sys --
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
-	protected final Statistics stats = new Statistics();
-	// -- management --
+	protected final Statistics stats;
 
+	// -- management --
 	// ie map
-	private final Map<IpfixFieldSpecifier, IpfixIe> mapFieldIe 
-										= new ConcurrentHashMap<IpfixFieldSpecifier, IpfixIe>();
+	private final Map<IpfixFieldSpecifier, IpfixIe> mapFieldIe;
 
 	// map set id to user record reader
-	private final Map<Integer, IpfixDataRecordReader> mapRecordReader 
-										= new ConcurrentHashMap<Integer, IpfixDataRecordReader>();
+	private final Map<Integer, IpfixDataRecordReader> mapRecordReader;
+
 	// map set id to received template records
-	private final Map<Integer, IpfixDataRecordSpecifier> mapRcvdTemlateRecord 
-										= new ConcurrentHashMap<Integer, IpfixDataRecordSpecifier>();
+	private final Map<Integer, IpfixDataRecordSpecifier> mapRcvdTemlateRecord;
 
 	// store user record reader
-	private final Set<IpfixDataRecordReader> listRecordReader 
-										= new CopyOnWriteArraySet<IpfixDataRecordReader>();
+	private final Set<IpfixDataRecordReader> listRecordReader;
+
+	public IpfixTemplateManagerImpl() {
+		stats = new Statistics();
+
+		mapFieldIe = new ConcurrentHashMap<IpfixFieldSpecifier, IpfixIe>();
+		// map set id to user record reader
+		mapRecordReader = new ConcurrentHashMap<Integer, IpfixDataRecordReader>();
+		// map set id to received template records
+		mapRcvdTemlateRecord = new ConcurrentHashMap<Integer, IpfixDataRecordSpecifier>();
+		// store user record reader
+		listRecordReader = new CopyOnWriteArraySet<IpfixDataRecordReader>();
+	}
+	
+	/**
+	 * used for getInstance method
+	 * 
+	 * @param stats
+	 * @param mapFieldIe
+	 * @param listRecordReaders
+	 */
+	private IpfixTemplateManagerImpl( 
+			Statistics stats,
+			Map<IpfixFieldSpecifier, IpfixIe> mapFieldIe,
+			Set<IpfixDataRecordReader> listRecordReaders ) {
+		// 
+		this.stats = stats;
+		this.mapFieldIe = mapFieldIe;
+		this.listRecordReader = listRecordReaders;
+		
+		// create new template id maps for new connections
+		// map set id to user record reader
+		mapRecordReader = new ConcurrentHashMap<Integer, IpfixDataRecordReader>();
+		// map set id to received template records
+		mapRcvdTemlateRecord = new ConcurrentHashMap<Integer, IpfixDataRecordSpecifier>();
+	}
+	
+	
+	/**
+	 * a new class that shares {@link Statistics}, Map<IpfixFieldSpecifier, IpfixIe> and
+	 * Set<IpfixDataRecordReader>
+	 * 
+	 * @return {@link IpfixTemplateManagerImpl}
+	 */
+	@Override
+	public IpfixTemplateManager getInstance() {
+		return new IpfixTemplateManagerImpl(stats, mapFieldIe, listRecordReader);
+	}
+	
 
 	@Override
 	public IpfixDataRecordSpecifier getDataRecordSpecifier(int setId) {

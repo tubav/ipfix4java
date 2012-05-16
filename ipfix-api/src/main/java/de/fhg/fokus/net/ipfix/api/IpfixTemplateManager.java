@@ -39,6 +39,13 @@ public interface IpfixTemplateManager {
 	}
 
 	/**
+	 * Create a new Template Manager that share common data, e.g. Statistics, RecordReader
+	 * 
+	 * @return {@link IpfixTemplateManager}
+	 */
+	public IpfixTemplateManager getInstance();
+
+	/**
 	 * Register template record so that subsequently data records can be
 	 * decoded.
 	 * 

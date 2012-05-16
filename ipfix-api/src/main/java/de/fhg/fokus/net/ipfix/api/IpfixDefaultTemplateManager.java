@@ -94,5 +94,12 @@ public class IpfixDefaultTemplateManager implements IpfixTemplateManager {
 		mapSetIdRecordReader.put(setId, reader);
 
 	}
+	/** 
+	 * does nothing in this implementation
+	 * TODO: implement this
+	 */
+	public IpfixTemplateManager getInstance() {
+		return this;
+	}
 
 }
