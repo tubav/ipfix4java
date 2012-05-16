@@ -18,7 +18,7 @@ public class IpfixTemplateManagerImpl implements IpfixTemplateManager {
 	// -- sys --
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 	protected final Statistics stats;
-
+	
 	// -- management --
 	// ie map
 	private final Map<IpfixFieldSpecifier, IpfixIe> mapFieldIe;
@@ -32,7 +32,14 @@ public class IpfixTemplateManagerImpl implements IpfixTemplateManager {
 	// store user record reader
 	private final Set<IpfixDataRecordReader> listRecordReader;
 
+	// store parent template manager
+	private final IpfixTemplateManagerImpl parentTM;
+	
+	// count number of template manager instance
+	private int numberOfInstances = 0;
+
 	public IpfixTemplateManagerImpl() {
+		parentTM = null;
 		stats = new Statistics();
 
 		mapFieldIe = new ConcurrentHashMap<IpfixFieldSpecifier, IpfixIe>();
@@ -51,22 +58,35 @@ public class IpfixTemplateManagerImpl implements IpfixTemplateManager {
 	 * @param mapFieldIe
 	 * @param listRecordReaders
 	 */
-	private IpfixTemplateManagerImpl( 
-			Statistics stats,
-			Map<IpfixFieldSpecifier, IpfixIe> mapFieldIe,
-			Set<IpfixDataRecordReader> listRecordReaders ) {
-		// 
-		this.stats = stats;
-		this.mapFieldIe = mapFieldIe;
-		this.listRecordReader = listRecordReaders;
+	private IpfixTemplateManagerImpl( IpfixTemplateManagerImpl tm ) {
+		this.parentTM = tm;
+		this.stats = tm.stats;
+		this.mapFieldIe = tm.mapFieldIe;
+		this.listRecordReader = tm.listRecordReader;
 		
 		// create new template id maps for new connections
 		// map set id to user record reader
 		mapRecordReader = new ConcurrentHashMap<Integer, IpfixDataRecordReader>();
 		// map set id to received template records
 		mapRcvdTemlateRecord = new ConcurrentHashMap<Integer, IpfixDataRecordSpecifier>();
+		
+		this.parentTM.incrementTmCounter();
 	}
 	
+	private synchronized void incrementTmCounter() {
+		++this.numberOfInstances;
+	}
+	
+	private synchronized void decrementTMCounter() {
+		--this.numberOfInstances;
+	}
+	
+	protected void finalize( ) throws Throwable {
+		if( null != this.parentTM) {
+			this.parentTM.decrementTMCounter();
+		}
+		super.finalize( );
+	}
 	
 	/**
 	 * a new class that shares {@link Statistics}, Map<IpfixFieldSpecifier, IpfixIe> and
@@ -76,7 +96,10 @@ public class IpfixTemplateManagerImpl implements IpfixTemplateManager {
 	 */
 	@Override
 	public IpfixTemplateManager getInstance() {
-		return new IpfixTemplateManagerImpl(stats, mapFieldIe, listRecordReader);
+		IpfixTemplateManager tm = new IpfixTemplateManagerImpl(this);
+		logger.debug("[IpfixTemplateManager] new instance: number of childs ({})", 
+				this.numberOfInstances);
+		return tm;
 	}
 	
 

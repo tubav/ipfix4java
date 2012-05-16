@@ -68,22 +68,24 @@ public final class IpfixCollector {
 		switch (evt) {
 		case CONNECTED:
 			for (final IpfixCollectorListener lsn : eventListeners) {
-				executor.execute(new Runnable() {
-					@Override
-					public void run() {
-						lsn.onConnect(handler);
-					}
-				});
+//				executor.execute(new Runnable() {
+//					@Override
+//					public void run() {
+//						lsn.onConnect(handler);
+//					}
+//				});
+				lsn.onConnect(handler);
 			}
 			break;
 		case DISCONNECTED:
 			for (final IpfixCollectorListener lsn : eventListeners) {
-				executor.execute(new Runnable() {
-					@Override
-					public void run() {
-						lsn.onDisconnect(handler);
-					}
-				});
+//				executor.execute(new Runnable() {
+//					@Override
+//					public void run() {
+//						lsn.onDisconnect(handler);
+//					}
+//				});
+				lsn.onDisconnect(handler);
 			}
 			break;
 		case MESSAGE:
@@ -109,6 +111,9 @@ public final class IpfixCollector {
 		// -- constants --
 		// -- model --
 		private final Socket socket;
+		// a connection local template manager
+		private final IpfixTemplateManager tm;
+		
 		private boolean exit = false;
 		private volatile Object attachment;
 		private long totalReceivedMessages=0;
@@ -118,7 +123,8 @@ public final class IpfixCollector {
 		private SocketAddress remoteAddress = null;
 		public ConnectionHandler(Socket socket){
 			this.socket = socket;
-			
+			// create a shared copy for this connection
+			this.tm = IpfixCollector.this.templateManager.getInstance();
 		}
 		/**
 		 * Starts handler, this will block thread until finished.
@@ -165,8 +171,7 @@ public final class IpfixCollector {
 							break;
 						}
 						
-						final IpfixMessage msg = new IpfixMessage(
-								IpfixCollector.this.templateManager, byteBuffer);
+						final IpfixMessage msg = new IpfixMessage(this.tm, byteBuffer);
 						totalReceivedMessages++;
 //						logger.debug("msg:  "+HexDump.toHexString(msg.getMessageBuffer()));
 //						 dispatch message to listeners
@@ -228,11 +233,12 @@ public final class IpfixCollector {
 			executor.execute(new Runnable() {
 				@Override
 				public void run() {
+					logger.debug("[ConnectionHandler] start connection reader: {}",socket);
 					ConnectionHandler handler = new ConnectionHandler(socket);
 					clients.add(handler);
 					try {
 						handler.start(); 
-						logger.debug("handler finished normally: {}",socket);
+						logger.debug("[ConnectionHandler] finished normally: {}",socket);
 					} catch (IOException e) {
 						logger.debug(e + "");
 					} finally {
