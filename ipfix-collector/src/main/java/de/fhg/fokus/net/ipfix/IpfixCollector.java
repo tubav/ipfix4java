@@ -50,7 +50,7 @@ public final class IpfixCollector {
 
 	// port to listen for incomming connections
 	// default 4379
-	private int servicePort = 4379;
+	private int servicePort = 4739;
 	
 	private enum CollectorEvents {
 		CONNECTED,
