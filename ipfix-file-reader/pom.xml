@@ -1,11 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.fhg.fokus.net</groupId>
 	<artifactId>ipfix-file-reader</artifactId>
 	<name>IPFIX File Reader </name>
-	<version>1.2</version>
 	<description>IPFIX file reader implementation.</description>
+
+    <parent>
+        <groupId>de.fhg.fokus.net</groupId>
+        <artifactId>ipfix4java</artifactId>
+        <version>1.2</version>
+    </parent>
 
 	<dependencies>
 		<dependency>
@@ -32,18 +36,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>

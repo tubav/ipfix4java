@@ -16,10 +16,33 @@
 
     <description>Java implementation of the IPFIX protocol</description>
 
-    <url>https://svnsrv.fokus.fraunhofer.de/cc/ccnet/pt/wiki/IPFIX4Java</url>
+    <distributionManagement>
+        <repository>
+            <id>tubav-pt</id>
+            <name>tubav repository</name>
+            <url>https://services.av.tu-berlin.de/nexus/content/repositories/packettracking/</url>
+        </repository>
+        <snapshotRepository>
+            <id>pt-tubav</id>
+            <name>tubav repository</name>
+            <url>https://services.av.tu-berlin.de/nexus/content/repositories/packettracking/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
