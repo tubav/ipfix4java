@@ -4,28 +4,14 @@
 	<groupId>de.fhg.fokus.net</groupId>
 	<artifactId>ipfix-file-reader</artifactId>
 	<name>IPFIX File Reader </name>
-	<version>0.9.1-SNAPSHOT</version>
-	<description>IPFIX file reader implementation.
-	</description>
-	<distributionManagement>
-		<repository>
-			<id>pt</id>
-			<url>${pt.releases.repo.url}</url>
-		</repository>
-		<snapshotRepository>
-			<id>pt</id>
-			<url>${pt.snapshots.repo.url}</url>
-		</snapshotRepository>
-		<site>
-			<id>pt-site</id>
-			<url>${pt.sites.deploy.url}</url>
-		</site>
-	</distributionManagement>
+	<version>1.2</version>
+	<description>IPFIX file reader implementation.</description>
+
 	<dependencies>
 		<dependency>
 			<groupId>de.fhg.fokus.net</groupId>
 			<artifactId>ipfix-api</artifactId>
-			<version>0.9.1-SNAPSHOT</version>
+			<version>1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -46,6 +32,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>

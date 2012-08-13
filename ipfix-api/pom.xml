@@ -1,29 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.fhg.fokus.net</groupId>
 	<artifactId>ipfix-api</artifactId>
 	<name>Java IPFIX API</name>
-	<version>0.9.1-SNAPSHOT</version>
-	<description>Java IPFIX API. 
-	</description>
+	<version>1.2</version>
+	<description>Java IPFIX API.</description>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	<distributionManagement>
-		<repository>
-			<id>pt</id>
-			<url>${pt.releases.repo.url}</url>
-		</repository>
-		<snapshotRepository>
-			<id>pt</id>
-			<url>${pt.snapshots.repo.url}</url>
-		</snapshotRepository>
-		<site>
-			<id>pt-site</id>
-			<url>${pt.sites.deploy.url}</url>
-		</site>
-	</distributionManagement>
 
 	<dependencies>
 		<dependency>
@@ -39,6 +26,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -51,4 +39,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>

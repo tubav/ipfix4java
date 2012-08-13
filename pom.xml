@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.fhg.fokus.net</groupId>
     <artifactId>ipfix4java</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.2</version>
     <name>IPFIX4Java </name>
     <packaging>pom</packaging>
 
@@ -13,21 +13,6 @@
         <module>ipfix-file-reader</module>
         <module>ipfix-collector</module>
     </modules>
-
-    <distributionManagement>
-        <repository>
-            <id>pt</id>
-            <url>${pt.releases.repo.url}</url>
-        </repository>
-        <snapshotRepository>
-            <id>pt</id>
-            <url>${pt.snapshots.repo.url}</url>
-        </snapshotRepository>
-        <site>
-            <id>pt-site</id>
-            <url>${pt.sites.deploy.url}</url>
-        </site>
-    </distributionManagement>
 
     <description>Java implementation of the IPFIX protocol</description>
 
